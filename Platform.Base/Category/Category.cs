@@ -1,26 +1,9 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Platform.Core;
 
 namespace Platform.Base.Category
-{
-    class Category
-    {
-    }
-}
-
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Booolean.Core.Models;
-
-namespace Booolean.Core.Webbase
 {
     public class Category : BaseModel
     {

@@ -1,26 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Platform.Base.HomeGrid
-{
-    class HomeGrid
-    {
-    }
-}
-
-
+﻿
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-using Booolean.Core.Models;
+using Platform.Core;
 
-namespace Booolean.Core.Webbase
+namespace Platform.Base.HomeGrid
 {
     public class HomeGrid : BaseModel
     {

@@ -1,26 +1,10 @@
-﻿using System;
+﻿
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Platform.Core;
 
 namespace Platform.Base.Video
-{
-    class Video
-    {
-    }
-}
-
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Booolean.Core.Models;
-
-namespace Booolean.Core.Webbase
 {
     public class Video : BaseModel
     {

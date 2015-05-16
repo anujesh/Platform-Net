@@ -1,27 +1,10 @@
-﻿using System;
+﻿
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Platform.Base.Post
-{
-    class Post
-    {
-    }
-}
+using Platform.Core;
 
-
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Booolean.Core.Models;
-
-namespace Booolean.Core.Webbase
+namespace Platform.Base.Basic
 {
     public class Post : BaseModel
     {

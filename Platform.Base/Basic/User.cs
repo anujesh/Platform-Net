@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Platform.Base.User
-{
-    class User
-    {
-    }
-}
-
+﻿
 
 using System;
 using System.Collections.Generic;
@@ -18,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Booolean.Core.Models;
+using Platform.Core;
 
-namespace Booolean.Core.Webbase
+namespace Platform.Base.Basic
 {
-    public class CoreUser
+    public class User
     {
         public int UserId { get; set; }
         public string UserName { get; set; }
@@ -51,7 +39,7 @@ namespace Booolean.Core.Webbase
             page = new Paging();
         }
 
-        public List<CoreUser> list { get; set; }
+        public List<User> list { get; set; }
         public Paging page { get; set; }
         public Summary summ { get; set; }
     }
@@ -60,7 +48,7 @@ namespace Booolean.Core.Webbase
 
     public class rpCoreUser : Response
     {
-        public CoreUser data { get; set; }
+        public User data { get; set; }
     }
 
     public class rpCoreUserList : Response

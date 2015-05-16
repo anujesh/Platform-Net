@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Platform.Core.Utilities
-{
-    class Configs
-    {
-    }
-}
-
+﻿
 
 using System;
 using System.Collections.Generic;
@@ -23,7 +11,7 @@ using Dapper;
 
 using MySql.Data.MySqlClient;
 
-namespace Booolean.Core.Utilities
+namespace Platform.Core.Utilities
 {
 
     public interface IConfigManager

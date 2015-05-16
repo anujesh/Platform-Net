@@ -1,36 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Platform.Base.Page
-{
-    class PageRepository
-    {
-    }
-}
-
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Configuration;
-using System.Data;
-using MySql.Data.MySqlClient;
 
 using Dapper;
 
-using Booolean.Core.Domain;
-using Booolean.Core.Utilities;
+using Platform.Core;
 
-namespace Booolean.Base.Repository
+
+namespace Platform.Base.Basic
 {
-    using Booolean.Core.Models;
-    using Booolean.Core.Webbase;
 
     public interface IPageRepository
     {
@@ -42,10 +21,10 @@ namespace Booolean.Base.Repository
         void Remove(int id);
     }
 
-    public class MyDatabase : Database<MyDatabase>
-    {
-        public Table<Page> Pages { get; set; }
-    }
+    //public class MyDatabase : Database<MyDatabase>
+    //{
+    //    public Table<Page> Pages { get; set; }
+    //}
 
     public class PageRepository : BaseRepository<Page> //, IPageRepository
     {

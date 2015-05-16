@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\packages\MySql.Data.6.9.6\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,18 +49,27 @@
     <Compile Include="Category\Category.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="HomeGrid\HomeGrid.cs" />
-    <Compile Include="Image\Image.cs" />
+    <Compile Include="Basic\Image.cs" />
     <Compile Include="Link\Link.cs" />
-    <Compile Include="Page\Page.cs" />
-    <Compile Include="Page\PageRepository.cs" />
-    <Compile Include="Post\Post.cs" />
+    <Compile Include="Basic\Page.cs" />
+    <Compile Include="Basic\PageRepository.cs" />
+    <Compile Include="Basic\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status\Status.cs" />
     <Compile Include="Tag\Tag.cs" />
-    <Compile Include="User\User.cs" />
+    <Compile Include="Basic\User.cs" />
     <Compile Include="Video\Video.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Platform.Core\Platform.Core.csproj">
+      <Project>{e1fd4bae-baba-44bd-9fdf-aaceb9b3217c}</Project>
+      <Name>Platform.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,12 @@
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\obj\Debug\Platform.Base.csprojResolveAssemblyReference.cache
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\bin\Debug\Platform.Base.dll.config
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\bin\Debug\Platform.Base.dll
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\bin\Debug\Platform.Base.pdb
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\bin\Debug\Dapper.dll
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\bin\Debug\MySql.Data.dll
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\bin\Debug\Platform.Core.dll
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\bin\Debug\Platform.Core.pdb
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\bin\Debug\Dapper.pdb
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\bin\Debug\Dapper.xml
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\obj\Debug\Platform.Base.dll
+C:\Projects\01-WebApps\bool2\Platform\Platform.Base\obj\Debug\Platform.Base.pdb
