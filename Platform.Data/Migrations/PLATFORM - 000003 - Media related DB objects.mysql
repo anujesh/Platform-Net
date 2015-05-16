@@ -1,0 +1,57 @@
+CREATE TABLE IF NOT EXISTS `<prefix>web_bas_album_master` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `url` VARCHAR(12) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL,
+    `title` VARCHAR(200) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL,
+    `descript` VARCHAR(500) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL,
+    `group_by` int(11) DEFAULT '1',
+    `ordered_by` int(11) DEFAULT '1',
+    `updated_at` datetime DEFAULT NULL,
+    `created_at` datetime DEFAULT NULL,
+    `updated_by` bigint(20) DEFAULT NULL,
+    `created_by` bigint(20) DEFAULT NULL,
+    `active` tinyint(4) DEFAULT NULL,
+    `locked` tinyint(4) DEFAULT NULL,
+    `online` tinyint(4) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+
+CREATE TABLE IF NOT EXISTS `<prefix>web_bas_image_master` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `title` varchar(180) CHARACTER SET utf8 NOT NULL,
+    `descript` varchar(300) CHARACTER SET utf8 NOT NULL,
+    `cdn_id` tinyint(4) DEFAULT '0',
+    `path` varchar(100) NOT NULL,
+    `group_id` INT(11) NULL DEFAULT 0,
+    `ordered_id` INT(11) NULL DEFAULT 0,    
+    `img_file` varchar(100) NOT NULL,
+    `updated_at` datetime NOT NULL,
+    `created_at` datetime NOT NULL,
+    `updated_by` int(11) DEFAULT '1',
+    `created_by` int(11) DEFAULT '1',
+    `locked` tinyint(4) DEFAULT '0',
+    `active` tinyint(4) DEFAULT '1',
+    `online` tinyint(4) DEFAULT '0',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+
+CREATE TABLE IF NOT EXISTS `<prefix>web_bas_video_master` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL,
+    `descript` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL,
+    `url` VARCHAR(12) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL,
+    `group_by` int(11) DEFAULT '1',
+    `ordered_by` int(11) DEFAULT '1',
+    `updated_at` datetime NOT NULL,
+    `created_at` datetime NOT NULL,
+    `updated_by` int(11) DEFAULT '1',
+    `created_by` int(11) DEFAULT '1',
+    `active` tinyint(4) DEFAULT NULL,
+    `locked` tinyint(4) DEFAULT NULL,
+    `online` tinyint(4) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+

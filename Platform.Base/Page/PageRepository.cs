@@ -1,0 +1,84 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Platform.Base.Page
+{
+    class PageRepository
+    {
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using System.Configuration;
+using System.Data;
+using MySql.Data.MySqlClient;
+
+using Dapper;
+
+using Booolean.Core.Domain;
+using Booolean.Core.Utilities;
+
+namespace Booolean.Base.Repository
+{
+    using Booolean.Core.Models;
+    using Booolean.Core.Webbase;
+
+    public interface IPageRepository
+    {
+        PageList GetAll();
+        Page Find(int id);
+        Page Find(string id);
+        Page Add(Page page);
+        Page Update(Page page);
+        void Remove(int id);
+    }
+
+    public class MyDatabase : Database<MyDatabase>
+    {
+        public Table<Page> Pages { get; set; }
+    }
+
+    public class PageRepository : BaseRepository<Page> //, IPageRepository
+    {
+        public PageRepository()
+        {
+            tableName = "bol_web_bas_page_master";
+        }
+        
+        //private IDbConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlDB"].ConnectionString);
+
+        public PageList GetAll()
+        {
+            PageList lists = new PageList();
+            
+            using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(string.Format(
+                    @"
+                    SELECT COUNT(*) as Total FROM {0};
+                    SELECT * FROM {0} LIMIT 500, 100"
+                    , tableName)))
+            {
+                lists.summ = multi.Read<Summary>().Single();
+                lists.list = multi.Read<Page>().AsList();
+            }
+
+            return lists;
+        }
+
+
+
+        public void Remove(int id)
+        {
+            ///var sqlQuery = string.Format("Delete From {0} Where EmpID = {1}", tableName, id);
+            ///this.conn.Execute(sqlQuery);
+        }
+    }
+}
