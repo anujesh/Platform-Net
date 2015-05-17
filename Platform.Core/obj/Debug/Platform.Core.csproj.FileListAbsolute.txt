@@ -1,4 +1,3 @@
-C:\Projects\01-WebApps\bool2\Platform\Platform.Core\obj\Debug\Platform.Core.csprojResolveAssemblyReference.cache
 C:\Projects\01-WebApps\bool2\Platform\Platform.Core\bin\Debug\Platform.Core.dll.config
 C:\Projects\01-WebApps\bool2\Platform\Platform.Core\bin\Debug\Platform.Core.dll
 C:\Projects\01-WebApps\bool2\Platform\Platform.Core\bin\Debug\Platform.Core.pdb
@@ -8,5 +7,6 @@ C:\Projects\01-WebApps\bool2\Platform\Platform.Core\bin\Debug\MySql.Data.dll
 C:\Projects\01-WebApps\bool2\Platform\Platform.Core\bin\Debug\Dapper.pdb
 C:\Projects\01-WebApps\bool2\Platform\Platform.Core\bin\Debug\Dapper.xml
 C:\Projects\01-WebApps\bool2\Platform\Platform.Core\bin\Debug\Dapper.Rainbow.MySql.xml
+C:\Projects\01-WebApps\bool2\Platform\Platform.Core\obj\Debug\Platform.Core.csprojResolveAssemblyReference.cache
 C:\Projects\01-WebApps\bool2\Platform\Platform.Core\obj\Debug\Platform.Core.dll
 C:\Projects\01-WebApps\bool2\Platform\Platform.Core\obj\Debug\Platform.Core.pdb

@@ -19,6 +19,7 @@ namespace Platform.Base.Basic
         public string Name { get; set; }
         public string Descript { get; set; }
         public string Content { get; set; }
+        public int ImageId { get; set; }
         public Image Image { get; set; }
     }
 

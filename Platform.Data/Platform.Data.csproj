@@ -54,11 +54,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Migrations\PLATFORM - 000001 - Basic objects.mysql" />
-    <None Include="Migrations\PLATFORM - 000001 - Setting table and data.mysql" />
-    <None Include="Migrations\PLATFORM - 000002 - User table and data.mysql" />
-    <None Include="Migrations\PLATFORM - 000003 - Media related DB objects.mysql" />
-    <None Include="Migrations\PLATFORM - 000004 - Page and post objects.mysql" />
+    <None Include="Migrations\PLATFORM - 000001 - Basic objects.mysql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM - 000001 - Setting table and data.mysql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM - 000002 - User table and data.mysql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM - 000003 - Media related DB objects.mysql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM - 000004 - Page and post objects.mysql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

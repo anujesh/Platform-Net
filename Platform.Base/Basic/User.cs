@@ -10,9 +10,14 @@ using Platform.Core;
 
 namespace Platform.Base.Basic
 {
+    public enum CoreGender
+    {
+        Male = 1,
+        Female = 0,
+    }
+
     public class User
     {
-        public int UserId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string PassWord { get; set; }
@@ -22,19 +27,16 @@ namespace Platform.Base.Basic
         public int Rank { get; set; }
         public string ProfileImage { get; set; }
         public string ShowName { get; set; }
-        public int Gender { get; set; }
-        public DOB dob { get; set; }
-        public int BirthDay { get; set; }
-        public int BirthMonth { get; set; }
-        public int BirthYear { get; set; }
+        public CoreGender Gender { get; set; }
+        public DOB Dob { get; set; }
         public string IpAddress { get; set; }
     }
 
     // List
 
-    public class CoreUserList
+    public class UserList
     {
-        public CoreUserList()
+        public UserList()
         {
             page = new Paging();
         }
@@ -46,14 +48,14 @@ namespace Platform.Base.Basic
 
     // Response
 
-    public class rpCoreUser : Response
+    public class rpUser : Response
     {
         public User data { get; set; }
     }
 
-    public class rpCoreUserList : Response
+    public class rpUserList : Response
     {
-        public CoreUserList data { get; set; }
+        public UserList data { get; set; }
     }
 
 }

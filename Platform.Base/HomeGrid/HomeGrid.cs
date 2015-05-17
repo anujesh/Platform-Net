@@ -16,9 +16,9 @@ namespace Platform.Base.HomeGrid
 
     public class GridBox : BaseModel
     {
-        public int GridId { get; set; }
         public int Height { get; set; }
         public int Weight { get; set; }
+        public int SortBy { get; set; }
     }
 
     // List
