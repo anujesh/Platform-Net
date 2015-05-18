@@ -17,7 +17,7 @@ namespace Platform.Base.Basic
         Page Find(int id);
         Page Find(string id);
         Page Add(Page page);
-        Page Update(Page page);
+        //Page Update(Page page);
         void Remove(int id);
     }
 
@@ -26,7 +26,7 @@ namespace Platform.Base.Basic
     //    public Table<Page> Pages { get; set; }
     //}
 
-    public class PageRepository : BaseRepository<Page> //, IPageRepository
+    public class PageRepository : BaseRepository<Page>, IPageRepository
     {
         public PageRepository()
         {
@@ -42,7 +42,7 @@ namespace Platform.Base.Basic
             using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(string.Format(
                     @"
                     SELECT COUNT(*) as Total FROM {0};
-                    SELECT * FROM {0} LIMIT 500, 100"
+                    SELECT * FROM {0} LIMIT 0, 100"
                     , tableName)))
             {
                 lists.summ = multi.Read<Summary>().Single();

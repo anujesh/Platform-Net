@@ -49,4 +49,14 @@ namespace Platform.Base.Basic
         public PageList data { get; set; }
     }
 
+    public class vmPage
+    {
+        public Page item { get; set; }
+    }
+
+    public class vmPageList
+    {
+        public List<Page> list { get; set; }
+    }
+
 }
