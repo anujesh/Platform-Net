@@ -1,10 +1,254 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
+using Platform.Core;
+using Platform.Core.Utilities;
+using Dapper;
 
 namespace Platform.Data
 {
-    class Backup
+
+    public interface IDBConfig : IConfigManager
     {
+        string DataPath { get; }
+        string BackupBasePath { get; }
+        string SchemaPath { get; }
+    }
+
+    public class DBConfig : ConfigMan, IDBConfig
+    {
+        public string DataPath
+        {
+            get { return GetStringConfig(configSection.AppConfig, "DB_Data_Path"); }
+        }
+
+        public string BackupBasePath
+        {
+            get { return GetStringConfig(configSection.AppConfig, "DB_Backup_Path"); }
+        }
+
+        public string SchemaPath
+        {
+            get { return GetStringConfig(configSection.AppConfig, "DB_Schema_Path"); }
+        }
+
+    }
+    //_config.BackupPath
+
+    public class DBHandler : DBAccess
+    {
+        string DataExtension = ".csv";
+        string ScriptExtension = ".sql";
+        string databaseName = "";
+        string backupName;
+
+        private IDBConfig _config;
+
+        public DBHandler(IDBConfig config)
+        {
+            _config = config;
+
+            backupName = DateTime.Now.ToString("Ymd-his-D");
+        }
+
+    /*---------------------------------------------------------------------------------------------*/
+
+        private IEnumerable<string> getDataFiles()
+        {
+            String[] files = Directory.GetFiles(_config.DataPath);
+
+            foreach(string file in files)
+            {
+                yield return file;
+            }
+        }
+
+        private IEnumerable<string> getBackupFiles()
+        {
+            String[] files = Directory.GetFiles(_config.BackupBasePath);
+
+            foreach(string file in files)
+            {
+                yield return file;
+            }
+        }
+
+        private IEnumerable<string> getSchemaFiles()
+        {
+            String[] files = Directory.GetFiles(_config.SchemaPath);
+
+            foreach(string file in files)
+            {
+                yield return file;
+            }
+        }
+
+        public string prepairForBackup()
+        {
+            Directory.CreateDirectory(_config.BackupBasePath + backupName);
+
+            string backupPath = _config.BackupBasePath + backupName + "/";
+            Directory.CreateDirectory(backupPath + "schema");
+            Directory.CreateDirectory(backupPath + "data");
+
+            return backupPath;
+        }
+
+
+        private List<string> getAllTable()
+        {
+            List<string> listTables = new List<string>();
+
+            using (var conn = GetOpenConnection())
+            {
+                var query = string.Format(
+                @"SELECT TABLE_NAME 
+                        FROM INFORMATION_SCHEMA.TABLES 
+                        WHERE TABLE_TYPE='BASE TABLE' 
+                            and TABLE_SCHEMA='{0}'", databaseName);
+                listTables = conn.Query<string>(query).AsList();
+            }
+            return listTables;
+        }
+
+        private List<string> getAllViews()
+        {
+            List<string> listViews = new List<string>();
+
+            using (var conn = GetOpenConnection())
+            {
+                var query = string.Format(
+                @"SELECT TABLE_NAME 
+                        FROM INFORMATION_SCHEMA.VIEWS 
+                        WHERE TABLE_SCHEMA='{0}'", databaseName);
+                listViews = conn.Query<string>(query).AsList();
+            }
+            return listViews;
+        }
+
+        /*---------------------------------------------------------------------------------------------*/
+
+        protected void deleteAllTables()
+        {
+            List<string> tables = getAllTable();
+            foreach(string t in tables)
+            {
+                deleteOneTable(t);
+            }
+        }
+
+        protected void deleteOneTable(string lTableName)
+        {
+            string query = string.Format("DROP TABLE {0}", lTableName);
+            //this.conn.Execute(sqlQuery);
+        }
+
+        /*---------------------------------------------------------------------------------------------*/
+
+        protected void deleteAllViews()
+        {
+            List<string> views = getAllTable();
+            foreach(string v in views)
+            {
+                deleteOneView(v);
+            }
+        }
+
+        protected void deleteOneView(string lViewName)
+        {
+            string query = string.Format("DROP VIEW {0}", lViewName);
+            //this.conn.Execute(sqlQuery);
+        }
+
+        /*---------------------------------------------------------------------------------------------*/
+
+
+        public void backupAllTables() 
+        {
+            List<string>  tables = getAllTable();
+            foreach(string t in tables)
+            {
+                backupOneTable(t);
+            }
+        }
+
+        public string backupOneTable(string lTableName) 
+        {
+            string outFile = string.Format("{0}data/{1}{2}", lTableName, lTableName, DataExtension) ;
+
+            if (File.Exists(outFile))
+                File.Delete(outFile);
+
+
+            string sql = string.Format("SELECT * INTO OUTFILE '{0}' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '~' LINES TERMINATED BY '\n' FROM {1}", 
+                                        outFile, lTableName);
+            using (var conn = GetOpenConnection())
+            {
+                conn.Execute(sql);
+            }
+
+            return outFile;
+        }
+
+        /*---------------------------------------------------------------------------------------------*/
+
+        protected void getAllSchemas()
+        {
+            List<string> tables = getAllTable();
+            foreach(string t in tables)
+            {
+                getOneTableSchema(t);
+            }
+
+            List<string> views = getAllViews();
+            foreach(string v in views)
+            {
+                getOneViewSchema(v);
+            }
+        }
+
+        protected void getOneTableSchema(string lTableName)
+        {
+            var listViews;
+            using (var conn = GetOpenConnection())
+            {
+                listViews = conn.Query<object>("SHOW CREATE TABLE " +  lTableName);
+            }
+
+            var ob = (Array)listViews[0];
+
+            File.WriteAllText(string.Format("{0}/schema/", "backupPath", lTableName, ScriptExtension, ob["Create Table"]);
+        }
+
+        //protected void getOneViewSchema(string lViewName)
+        //{
+        //    $ss = DB::select("SHOW CREATE VIEW " .  $lViewName);
+        //    $ob = (array)$ss[0];
+        //    $this->log[] = "Get Schema View - " . $lViewName;
+
+        //    $temp1 = explode(" VIEW ", $ob["Create View"]);
+        //    $temp2 = "CREATE VIEW " . $temp1[1];
+
+        //    $result = file_put_contents($this->backupPath . "/schema/" . $lViewName .  $this->ScriptExtension, $temp2);
+
+        //}
+
+        protected function runSQLSchemaScript($fileName)
+        {
+            $temp1 = explode("/", $fileName);
+            $objectName = $temp1[count($temp1)-1];
+            $objectName = str_replace($this->ScriptExtension , "", $objectName);
+
+            DB::Statement("DROP TABLE IF EXISTS ". $objectName);
+            DB::Statement("DROP VIEW IF EXISTS ". $objectName);
+
+            $contents = File::get($fileName);	
+            DB::Statement($contents);
+            $this->log('Schema Load - ' . $fileName);
+
+        }
+        /*---------------------------------------------------------------------------------------------*/
     }
 }
 
@@ -31,22 +275,6 @@ namespace Platform.Data
 //    protected $DataExtension;
 //    protected $ScriptExtension;
 //    protected $log;
-
-
-//    public function __construct()
-//    {
-//        $this->backupPath  	= Config::get('app.app_path_backup');
-//        $this->itemPrefix	= Config::get('database.connections.mysql.prefix');
-//        $this->database 	= Config::get('database.connections.mysql.database');
-//        $this->dbHost	 	= Config::get('database.connections.mysql.host');
-//        $this->dbUsername	=  Config::get('database.connections.mysql.username');
-//        $this->dbPassword	=  Config::get('database.connections.mysql.password');
-
-//        $this->DataExtension = ".csv";
-//        $this->ScriptExtension = ".sql";
-//        $this->backupName 	= date("Ymd-his-D");
-
-//    }
 
 //    public function godaddy_backup()
 //    {
@@ -84,15 +312,7 @@ namespace Platform.Data
 //        echo __DIR__;
 //    }
 
-//    public function prepairForBackup()
-//    {
-//        mkdir($this->backupPath . $this->backupName);
-//        $this->backupPath = $this->backupPath . "/" . $this->backupName . "/";
-//        mkdir($this->backupPath . 'schema' );
-//        mkdir($this->backupPath . 'data' );
-//        $this->log('Prepair for backup - ' .  $this->backupName);
-//        return $this->backupPath;
-//    }
+
 
 //    public function prepairForRestore($backupName, $database = "")
 //    {
@@ -108,120 +328,9 @@ namespace Platform.Data
 //        return $this->backupPath;
 //    }
 
-//    public function GetbackupNames()
-//    {
 
-//        $names = array();
-//        //DD(opendir('C:\wamp\www\v\ulavi\database\backup'));
-//        //DD($this->backupPath);
 
-////echo $_SERVER['DOCUMENT_ROOT'];
-//        //DD(__DIR__);
 
-//        if ($handle = opendir($this->backupPath))
-//        {
-
-//            /* This is the correct way to loop over the directory. */
-//            while (false !== ($entry = readdir($handle)))
-//            {
-//                if ($entry != "." && $entry != "..")
-//                {
-//                    $names[]  = "$entry";
-//                }
-//                //echo $entry;
-//            }
-//            closedir($handle);
-//        }
-//        return $names;
-//    }
-
-///*---------------------------------------------------------------------------------------------*/
-
-//    public function getAllTable()
-//    {
-//        $return = array();
-//        $listTables = DB::select("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' and TABLE_SCHEMA='" . $this->database . "'");
-//        //DD($listTables);
-//        foreach($listTables as $lV)
-//        {
-//            $return[] = $lV->TABLE_NAME;
-//        }
-//        return $return;
-//    }
-
-//    public function getAllViews()
-//    {
-//        $return = array();
-//        $listViews = DB::select("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_SCHEMA='" . $this->database . "'");
-//        foreach($listViews as $lV)
-//        {
-//            $return[] = $lV->TABLE_NAME;
-//        }
-//        return $return;
-//    }
-
-///*---------------------------------------------------------------------------------------------*/
-
-//    protected function deleteAllTables()
-//    {
-//        $tables = $this->getAllTable();
-//        foreach($tables as $t)
-//        {
-//            $this->deleteOneTables($t);
-//        }
-//    }
-
-//    protected function deleteOneTable($lTableName)
-//    {
-//        $this->log("Dropping table - " . $lTableName);
-//        DB::Statement("DROP TABLE " . $lTableName);
-//    }
-
-///*---------------------------------------------------------------------------------------------*/
-
-//    protected function deleteAllViews()
-//    {
-//        $views = $this->getAllTable();
-//        foreach($views as $v)
-//        {
-//            $this->deleteOneViews($v);
-//        }
-//    }
-
-//    protected function deleteOneView($lViewName)
-//    {
-//        $this->log("Dropping view - " . $lViewName);
-//        DB::Statement("DROP VIEW " . $lViewName);
-//    }
-
-///*---------------------------------------------------------------------------------------------*/
-
-//    public function backupAllTables() 
-//    {
-//        $tables = $this->getAllTable();
-//        foreach($tables as $t)
-//        {
-//            $this->backupOneTable($t);
-//        }
-//    }
-
-//    public function backupOneTable($lTableName) 
-//    {
-//        $outFile = $this->backupPath . 'data/' . $lTableName . $this->DataExtension ;
-//        //$outFile = $this->backupPath . 'data/' . $lTableName . $this->ScriptExtension ;
-//        if (file_exists($outFile))
-//        {
-//            unlink($outFile);
-//        }
-		
-//        $this->log("Backup data - " . $lTableName);
-//        $sql = "SELECT * INTO OUTFILE '$outFile' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '~' LINES TERMINATED BY '\n' FROM $lTableName";
-  		
-//        //DD($sql);
-//        $results 	= DB::Statement($sql);
-//        //return $results;
-//        return $outFile;
-//    }
 
 ///*---------------------------------------------------------------------------------------------*/
 
@@ -260,79 +369,9 @@ namespace Platform.Data
 
 //    }
 
-///*---------------------------------------------------------------------------------------------*/
 
-//    protected function getDataFileNames()
-//    {
-//        foreach(glob($this->backupPath . 'data/*' . $this->DataExtension) as $f)
-//        {
-//            $filename[] = $f;
-//        }
-//        return $filename;
-//    }
 
-//    protected function getSchemaFileNames()
-//    {
-//        foreach(glob($this->backupPath . 'schema/*' . $this->ScriptExtension) as $f)
-//        {
-//            $filename[] = $f;
-//        }
-//        return $filename;
-//    }
 
-///*---------------------------------------------------------------------------------------------*/
-
-//    protected function getAllSchemas()
-//    {
-//        $tables = $this->getAllTable();
-//        foreach($tables as $t)
-//        {
-//            $this->getOneTableSchema($t);
-//        }
-
-//        $views = $this->getAllViews();
-//        foreach($views as $v)
-//        {
-//            $this->getOneViewSchema($v);
-//        }
-//    }
-
-//    protected function getOneTableSchema($lTableName)
-//    {
-//        $ss = DB::select("SHOW CREATE TABLE " .  $lTableName);
-//        $ob = (array)$ss[0];
-//        $this->log[] = "Get Schema Table - " . $lTableName;
-//        $result = file_put_contents($this->backupPath . "/schema/" . $lTableName .  $this->ScriptExtension, $ob["Create Table"]);
-//        return $result; 
-//    }
-
-//    protected function getOneViewSchema($lViewName)
-//    {
-//        $ss = DB::select("SHOW CREATE VIEW " .  $lViewName);
-//        $ob = (array)$ss[0];
-//        $this->log[] = "Get Schema View - " . $lViewName;
-
-//        $temp1 = explode(" VIEW ", $ob["Create View"]);
-//        $temp2 = "CREATE VIEW " . $temp1[1];
-
-//        $result = file_put_contents($this->backupPath . "/schema/" . $lViewName .  $this->ScriptExtension, $temp2);
-//        return $result; 
-//    }
-
-//    protected function runSQLSchemaScript($fileName)
-//    {
-//        $temp1 = explode("/", $fileName);
-//        $objectName = $temp1[count($temp1)-1];
-//        $objectName = str_replace($this->ScriptExtension , "", $objectName);
-
-//        DB::Statement("DROP TABLE IF EXISTS ". $objectName);
-//        DB::Statement("DROP VIEW IF EXISTS ". $objectName);
-
-//        $contents = File::get($fileName);	
-//        DB::Statement($contents);
-//        $this->log('Schema Load - ' . $fileName);
-
-//    }
 
 //    protected function runSQLDataScript($fileName)
 //    {

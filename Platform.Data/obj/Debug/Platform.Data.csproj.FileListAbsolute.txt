@@ -16,3 +16,6 @@ C:\Projects\01-WebApps\bool2\Platform\Platform.Data\bin\Debug\Dapper.Rainbow.MyS
 C:\Projects\01-WebApps\bool2\Platform\Platform.Data\bin\Debug\log4net.xml
 C:\Projects\01-WebApps\bool2\Platform\Platform.Data\obj\Debug\Platform.Data.dll
 C:\Projects\01-WebApps\bool2\Platform\Platform.Data\obj\Debug\Platform.Data.pdb
+C:\Projects\01-WebApps\bool2\Platform\Platform.Data\obj\Debug\Platform.Data.csprojResolveAssemblyReference.cache
+C:\Projects\01-WebApps\bool2\Platform\Platform.Data\bin\Debug\Platform.Core.dll
+C:\Projects\01-WebApps\bool2\Platform\Platform.Data\bin\Debug\Platform.Core.pdb

@@ -16,7 +16,7 @@ namespace Platform.Core.Utilities
 
     public interface IConfigManager
     {
-        string App_Path_Root { get; }
+        //string App_Path_Root { get; }
         string DbPrefix { get; }
         string ConnectionString { get; }
     }
@@ -31,7 +31,7 @@ namespace Platform.Core.Utilities
         UserSetting
     }
 
-    public abstract class ConfigManager
+    public abstract class ConfigManager : IConfigManager
     {
         public bool IsESBSwitchEnabled
         {
@@ -120,7 +120,7 @@ namespace Platform.Core.Utilities
         public DateTime TimeStamp { get; set; }
     }
 
-    public class ConfigMan : ConfigManager
+    public class ConfigMan : ConfigManager, IConfigManager
     {
         protected override List<Config> GetConfigsFromCache()
         {

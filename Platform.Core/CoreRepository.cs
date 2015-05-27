@@ -15,6 +15,22 @@ namespace Platform.Core
         T Find(string ukey);
     }
 
+    public class DBAccess
+    {
+        protected IDbConnection GetOpenConnection()
+        {
+            IDbConnection conn = GetConnection();
+            conn.Open();
+            return conn;
+        }
+
+        protected IDbConnection GetConnection()
+        {
+            IDbConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlDB"].ConnectionString);
+            return conn;
+        }
+    }
+
     public class BaseRepository<T> where T : class
     {
         protected string tableName = "~";
