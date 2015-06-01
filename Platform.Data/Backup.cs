@@ -198,28 +198,28 @@ namespace Platform.Data
             List<string> tables = getAllTable();
             foreach(string t in tables)
             {
-                getOneTableSchema(t);
+                //getOneTableSchema(t);
             }
 
             List<string> views = getAllViews();
             foreach(string v in views)
             {
-                getOneViewSchema(v);
+                //getOneViewSchema(v);
             }
         }
 
-        protected void getOneTableSchema(string lTableName)
-        {
-            var listViews;
-            using (var conn = GetOpenConnection())
-            {
-                listViews = conn.Query<object>("SHOW CREATE TABLE " +  lTableName);
-            }
+        //protected void getOneTableSchema(string lTableName)
+        //{
+        //    object[] listViews = null;
+        //    using (var conn = GetOpenConnection())
+        //    {
+        //        listViews = conn.Query<object>("SHOW CREATE TABLE " +  lTableName);
+        //    }
 
-            var ob = (Array)listViews[0];
+        //    var ob = (Array)listViews[0];
 
-            File.WriteAllText(string.Format("{0}/schema/", "backupPath", lTableName, ScriptExtension, ob["Create Table"]);
-        }
+        //    File.WriteAllText(string.Format("{0}/schema/", "backupPath", lTableName, ScriptExtension, ob["Create Table"]);
+        //}
 
         //protected void getOneViewSchema(string lViewName)
         //{
@@ -234,99 +234,59 @@ namespace Platform.Data
 
         //}
 
-        protected function runSQLSchemaScript($fileName)
-        {
-            $temp1 = explode("/", $fileName);
-            $objectName = $temp1[count($temp1)-1];
-            $objectName = str_replace($this->ScriptExtension , "", $objectName);
+        //protected function runSQLSchemaScript($fileName)
+        //{
+        //    $temp1 = explode("/", $fileName);
+        //    $objectName = $temp1[count($temp1)-1];
+        //    $objectName = str_replace($this->ScriptExtension , "", $objectName);
 
-            DB::Statement("DROP TABLE IF EXISTS ". $objectName);
-            DB::Statement("DROP VIEW IF EXISTS ". $objectName);
+        //    DB::Statement("DROP TABLE IF EXISTS ". $objectName);
+        //    DB::Statement("DROP VIEW IF EXISTS ". $objectName);
 
-            $contents = File::get($fileName);	
-            DB::Statement($contents);
-            $this->log('Schema Load - ' . $fileName);
+        //    $contents = File::get($fileName);	
+        //    DB::Statement($contents);
+        //    $this->log('Schema Load - ' . $fileName);
 
-        }
+        //}
         /*---------------------------------------------------------------------------------------------*/
+        //    public function godaddy_backup()
+        //    {
+        //        $backup = $this->backupPath .   $this->backupName . $this->ScriptExtension; //$this->backupPath.'/'.$this->database.'_backup_'.date('Y').'_'.date('m').'_'.date('d').'.sql';
+        //        $cmd = "mysqldump --opt -h $this->dbHost -p" . "$this->dbPassword -u" . "$this->dbUsername $this->database > $backup";
+        //        try {
+        //            system($cmd);
+        //            return 'Backup Successfuly Complete ' . $this->backupName;
+        //        } catch(PDOException $error) {
+        //            return $error->getMessage();
+        //        } 
+        //        echo "ED";
+        //    }
+
+        //    public function godaddy_restore($backup="") 
+        //    {
+
+        //        //$backup = $this->backupPath . $backup;
+        //        $mysqlImportFilename = 'file-to-restore.sql';
+        //        if (file_exists($mysqlImportFilename))
+        //        {
+        //            echo "TES";
+        //        }
+        //        $cmd = "mysql -h" . "$this->dbHost -p" . "$this->dbPassword -u" . "$this->dbUsername $this->database < $mysqlImportFilename";
+        //        $cmd = "mysqlimport -u $this->dbUsername -p $this->dbPassword $this->database $mysqlImportFilename";
+
+        //        echo '<br>';
+        //        echo $cmd;
+        //        try {
+        //            exec($cmd);
+        //            return 'Restore successfuly complete';
+        //        } catch(PDOException $error) {
+        //            return $error->getMessage();
+        //        } 
+        //        echo __DIR__;
+        //    }
+
     }
 }
-
-
-//<?php namespace platform\Utility;
-////platform\Utility\dbHandler
-
-//use Config;
-//use DB;
-//use File;
-
-//class dbHandler 
-//{
-
-//    protected $backupName;
-//    protected $backupFile;
-//    protected $backupPath;
-//    protected $itemPrefix;
-//    protected $database;
-//    protected $dbHost;
-//    protected $dbUsername;
-//    protected $dbPassword;
-
-//    protected $DataExtension;
-//    protected $ScriptExtension;
-//    protected $log;
-
-//    public function godaddy_backup()
-//    {
-//        $backup = $this->backupPath .   $this->backupName . $this->ScriptExtension; //$this->backupPath.'/'.$this->database.'_backup_'.date('Y').'_'.date('m').'_'.date('d').'.sql';
-//        $cmd = "mysqldump --opt -h $this->dbHost -p" . "$this->dbPassword -u" . "$this->dbUsername $this->database > $backup";
-//        try {
-//            system($cmd);
-//            return 'Backup Successfuly Complete ' . $this->backupName;
-//        } catch(PDOException $error) {
-//            return $error->getMessage();
-//        } 
-//        echo "ED";
-//    }
-
-//    public function godaddy_restore($backup="") 
-//    {
-		
-//        //$backup = $this->backupPath . $backup;
-//        $mysqlImportFilename = 'file-to-restore.sql';
-//        if (file_exists($mysqlImportFilename))
-//        {
-//            echo "TES";
-//        }
-//        $cmd = "mysql -h" . "$this->dbHost -p" . "$this->dbPassword -u" . "$this->dbUsername $this->database < $mysqlImportFilename";
-//        $cmd = "mysqlimport -u $this->dbUsername -p $this->dbPassword $this->database $mysqlImportFilename";
-
-//        echo '<br>';
-//        echo $cmd;
-//        try {
-//            exec($cmd);
-//            return 'Restore successfuly complete';
-//        } catch(PDOException $error) {
-//            return $error->getMessage();
-//        } 
-//        echo __DIR__;
-//    }
-
-
-
-//    public function prepairForRestore($backupName, $database = "")
-//    {
-//        $this->backupName = $backupName;
-//        if ($database<>"")
-//        {
-//            $this->database   =	$database;
-//        }
-		
-//        $this->backupPath = $this->backupPath . "/" . $this->backupName . "/";
-//        // TODO check or the path exists
-//        $this->log('Prepair for Restore - ' .  $this->backupName);
-//        return $this->backupPath;
-//    }
 
 
 

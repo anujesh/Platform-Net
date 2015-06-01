@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Backup.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="dbCareService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

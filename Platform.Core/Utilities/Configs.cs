@@ -19,6 +19,8 @@ namespace Platform.Core.Utilities
         //string App_Path_Root { get; }
         string DbPrefix { get; }
         string ConnectionString { get; }
+        string DbMigrationFolders { get;  }
+        string DbMigrationBase { get; }
     }
 
     public enum configSection
@@ -56,6 +58,16 @@ namespace Platform.Core.Utilities
         public string DbPrefix
         {
             get { return GetStringConfig(configSection.AppConfig, "DB_Object_Prefix"); }
+        }
+
+        public string DbMigrationFolders
+        {
+            get { return GetStringConfig(configSection.AppConfig, "DB_Migration_Folders"); }
+        }
+
+        public string DbMigrationBase
+        {
+            get { return GetStringConfig(configSection.AppConfig, "DB_Migration_Base"); }
         }
 
         #region "Core_Functions"
