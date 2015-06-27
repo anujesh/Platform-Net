@@ -6,7 +6,7 @@ using Platform.Core;
 
 namespace Platform.Base.Tag
 {
-    public class Tag : BaseModel
+    public class Tag : CoreModel
     {
         public string TagKey { get; set; }
         public string TagName { get; set; }
@@ -14,9 +14,9 @@ namespace Platform.Base.Tag
 
     // List
 
-    public class TagList
+    public class Tags
     {
-        public TagList()
+        public Tags()
         {
             page = new Paging();
         }
@@ -33,9 +33,9 @@ namespace Platform.Base.Tag
         public Tag data { get; set; }
     }
 
-    public class rpTagList : Response
+    public class rpTags : Response
     {
-        public TagList data { get; set; }
+        public Tags data { get; set; }
     }
 
 }

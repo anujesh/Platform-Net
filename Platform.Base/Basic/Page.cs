@@ -1,12 +1,9 @@
-﻿
-
+﻿using Platform.Core;
 using System.Collections.Generic;
-
-using Platform.Core;
 
 namespace Platform.Base.Basic
 {
-    public class Page : BaseModel
+    public class Page : CoreModel
     {
         public Page()
         {
@@ -25,9 +22,9 @@ namespace Platform.Base.Basic
 
     // List
 
-    public class PageList
+    public class Pages
     {
-        public PageList()
+        public Pages()
         {
             page = new Paging();
         }
@@ -44,9 +41,9 @@ namespace Platform.Base.Basic
         public Page data { get; set; }
     }
 
-    public class rpPageList : Response
+    public class rpPages : Response
     {
-        public PageList data { get; set; }
+        public Pages data { get; set; }
     }
 
     public class vmPage
@@ -54,7 +51,7 @@ namespace Platform.Base.Basic
         public Page item { get; set; }
     }
 
-    public class vmPageList
+    public class vmPages
     {
         public List<Page> list { get; set; }
     }

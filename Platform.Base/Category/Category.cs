@@ -5,7 +5,7 @@ using Platform.Core;
 
 namespace Platform.Base.Category
 {
-    public class Category : BaseModel
+    public class Category : CoreModel
     {
         public string UKey { get; set; }
         public string Url { get; set; }
@@ -15,9 +15,9 @@ namespace Platform.Base.Category
 
     // List
 
-    public class CategoryList
+    public class Categories
     {
-        public CategoryList()
+        public Categories()
         {
             page = new Paging();
         }
@@ -34,9 +34,9 @@ namespace Platform.Base.Category
         public Category data { get; set; }
     }
 
-    public class rpCategoryList : Response
+    public class rpCategories : Response
     {
-        public CategoryList data { get; set; }
+        public Categories data { get; set; }
     }
 
 }

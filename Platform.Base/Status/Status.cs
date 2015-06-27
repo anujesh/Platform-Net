@@ -6,7 +6,7 @@ using Platform.Core;
 
 namespace Platform.Base.Status
 {
-    public class Status : BaseModel
+    public class Status : CoreModel
     {
         public string Content { get; set; }
     }

@@ -6,7 +6,7 @@ using Platform.Core;
 
 namespace Platform.Base.HomeGrid
 {
-    public class HomeGrid : BaseModel
+    public class HomeGrid : CoreModel
     {
         public string GridName { get; set; }
         public DateTime StartDate { get; set; }
@@ -14,7 +14,7 @@ namespace Platform.Base.HomeGrid
         public List<GridBox> Boxes { get; set; }
     }
 
-    public class GridBox : BaseModel
+    public class GridBox : CoreModel
     {
         public int Height { get; set; }
         public int Weight { get; set; }
@@ -23,9 +23,9 @@ namespace Platform.Base.HomeGrid
 
     // List
 
-    public class HomeGridList
+    public class HomeGrids
     {
-        public HomeGridList()
+        public HomeGrids()
         {
             page = new Paging();
         }
@@ -42,9 +42,9 @@ namespace Platform.Base.HomeGrid
         public HomeGrid data { get; set; }
     }
 
-    public class rpHomeGridList : Response
+    public class rpHomeGrids : Response
     {
-        public HomeGridList data { get; set; }
+        public HomeGrids data { get; set; }
     }
 
 }

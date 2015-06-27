@@ -1,12 +1,12 @@
-﻿
-
+﻿using Platform.Core;
 using System.Collections.Generic;
-
-using Platform.Core;
 
 namespace Platform.Base.Video
 {
-    public class Video : BaseModel
+    //ula_mda_bas_video_master
+    //Id,UpdatedAt,CreatedAt,UpdatedBy,CreatedBy,Active,Locked,Online
+
+    public class Video : CoreModel
     {
         public string Name { get; set; }
         public string Descript { get; set; }
@@ -14,9 +14,9 @@ namespace Platform.Base.Video
 
     // List
 
-    public class VideoList
+    public class Videos
     {
-        public VideoList()
+        public Videos()
         {
             page = new Paging();
         }
@@ -33,9 +33,9 @@ namespace Platform.Base.Video
         public Video data { get; set; }
     }
 
-    public class rpVideoList : Response
+    public class rpVideos : Response
     {
-        public VideoList data { get; set; }
+        public Videos data { get; set; }
     }
 
 }

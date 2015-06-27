@@ -79,10 +79,10 @@ namespace Platform.Data
 
                 foreach(String file in files)
                 {
-                    dbModuleVersion = getCurrentModuleDbVersion(folder);
+                    int dbModuleVersion = getCurrentModuleDbVersion(folder);
                     si.LoadScriptFile(basename(file));
 
-                    if (file_version > dbModuleVersion)
+                    if (si.Version > dbModuleVersion)
                     {
                         try
                         {
@@ -102,6 +102,28 @@ namespace Platform.Data
                     }
                 }
             }
+        }
+
+        public string basename(string fileName)
+        {
+            return _config.DbMigrationBase + fileName;
+        }
+
+        private int getCurrentModuleDbVersion(string fileModule)
+        {
+            int found = 0;
+
+            try
+            {
+                int.TryParse(listDbInfos.Where(x => x.module_name == fileModule).FirstOrDefault().version_max, out found);
+                return found;
+            }
+            catch (Exception ex)
+            {
+                //DIE("Unable to access the version infomation table, please check the Configs and make sure you run the setup first.");
+            }
+
+            return found;
         }
     }
 
@@ -159,57 +181,3 @@ namespace Platform.Data
     }
 }
 
-
-
-
-    
-
-    //------------------- HELPERS
-
-
-
-    //private function getCurrentModuleDbVersion($file_module)
-    //{
-    //    try
-    //    {
-    //        $sql = "SELECT max(version) as version
-    //                FROM " . $this->db_prefix . "tbl_version_info 
-    //                WHERE module_name='$file_module'";
-    //        $dt = DB::SELECT($sql);
-    //        $dt = $dt[0];
-    //        if (isset($dt->version))
-    //        {
-    //            return $dt->version; 
-    //        }
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        DIE("Unable to access the version infomation table, please check the Configs and make sure you run the setup first.");
-    //        return 0;
-    //    }
-    //}
-
-    //private function minify($buffer)
-    //{
-    //    $search = array(
-    //        '/\>[^\S ]+/s',  // strip whitespaces after tags, except space
-    //        '/[^\S ]+\</s',  // strip whitespaces before tags, except space
-    //        '/(\s)+/s',       // shorten multiple whitespace sequences
-    //        '/[\n\r]/',
-    //        '/;/'
-    //    );
-
-    //    $replace = array(
-    //        '>',
-    //        '<',
-    //        '\\1',
-    //        ' ',
-    //        '$$'
-    //    );
-
-    //    $buffer = preg_replace($search, $replace, $buffer);
-    //    return $buffer;
-    //}
-
-
-}

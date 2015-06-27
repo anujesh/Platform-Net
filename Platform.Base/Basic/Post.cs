@@ -1,12 +1,9 @@
-﻿
-
+﻿using Platform.Core;
 using System.Collections.Generic;
-
-using Platform.Core;
 
 namespace Platform.Base.Basic
 {
-    public class Post : BaseModel
+    public class Post : CoreModel
     {
         public string Key { get; set; }
         public string Slug { get; set; }
@@ -17,9 +14,9 @@ namespace Platform.Base.Basic
 
     // List
 
-    public class PostList
+    public class Posts
     {
-        public PostList()
+        public Posts()
         {
             page = new Paging();
         }
@@ -36,9 +33,9 @@ namespace Platform.Base.Basic
         public Post data { get; set; }
     }
 
-    public class rpPostList : Response
+    public class rpPosts : Response
     {
-        public PostList data { get; set; }
+        public Posts data { get; set; }
     }
 
 }

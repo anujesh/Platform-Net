@@ -6,9 +6,11 @@ using Platform.Core;
 
 namespace Platform.Base.Album
 {
+
+
     // item
 
-    public class Album : BaseModel
+    public class Album : CoreModel
     {
         public string Name { get; set; }
         public string Descript { get; set; }
@@ -16,9 +18,9 @@ namespace Platform.Base.Album
 
     // List
 
-    public class AlbumList
+    public class Albums
     {
-        public AlbumList()
+        public Albums()
         {
             page = new Paging();
         }
@@ -35,8 +37,8 @@ namespace Platform.Base.Album
         public Album data { get; set; }
     }
 
-    public class rpAlbumList : Response
+    public class rpAlbums : Response
     {
-        public AlbumList data { get; set; }
+        public Albums data { get; set; }
     }
 }

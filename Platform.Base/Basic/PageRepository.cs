@@ -1,19 +1,13 @@
-﻿
-
-using System.Linq;
-
-
+﻿using System.Linq;
 using Dapper;
-
 using Platform.Core;
-
 
 namespace Platform.Base.Basic
 {
 
     public interface IPageRepository
     {
-        PageList GetAll();
+        Pages GetAll();
         Page Find(int id);
         Page Find(string id);
         Page Add(Page page);
@@ -35,9 +29,9 @@ namespace Platform.Base.Basic
         
         //private IDbConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlDB"].ConnectionString);
 
-        public PageList GetAll()
+        public Pages GetAll()
         {
-            PageList lists = new PageList();
+            Pages lists = new Pages();
             
             using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(string.Format(
                     @"

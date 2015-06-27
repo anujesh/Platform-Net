@@ -51,6 +51,7 @@
     <Compile Include="Album\Album.cs" />
     <Compile Include="Category\Category.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Element\Element.cs" />
     <Compile Include="HomeGrid\HomeGrid.cs" />
     <Compile Include="Basic\Image.cs" />
     <Compile Include="Link\Link.cs" />

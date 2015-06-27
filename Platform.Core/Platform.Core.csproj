@@ -57,6 +57,7 @@
     <Compile Include="CoreRepository.cs" />
     <Compile Include="Elements.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Bar.cs" />
     <Compile Include="Utilities\Configs.cs" />
   </ItemGroup>
   <ItemGroup>

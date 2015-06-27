@@ -1,12 +1,9 @@
-﻿
-
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
 using Platform.Core;
 
 namespace Platform.Base.Basic
 {
-    public class Image : BaseModel
+    public class Image : CoreModel
     {
         public Image()
         {
@@ -20,16 +17,9 @@ namespace Platform.Base.Basic
 
     // List
 
-    public class ImageList
+    public class Images : CoreList
     {
-        public ImageList()
-        {
-            page = new Paging();
-        }
-
         public List<Image> list { get; set; }
-        public Paging page { get; set; }
-        public Summary summ { get; set; }
     }
 
     // Response
@@ -39,9 +29,9 @@ namespace Platform.Base.Basic
         public Image data { get; set; }
     }
 
-    public class rpImageList : Response
+    public class rpImages : Response
     {
-        public ImageList data { get; set; }
+        public Images data { get; set; }
     }
 
 }

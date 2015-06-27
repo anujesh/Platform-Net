@@ -1,15 +1,10 @@
-﻿
-
+﻿using Dapper;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Configuration;
+using System.Linq;
 using System.Runtime.Caching;
-
-using Dapper;
-
-using MySql.Data.MySqlClient;
 
 namespace Platform.Core.Utilities
 {
@@ -33,7 +28,7 @@ namespace Platform.Core.Utilities
         UserSetting
     }
 
-    public abstract class ConfigManager : IConfigManager
+    public static class ConfigMan : IConfigManager
     {
         public bool IsESBSwitchEnabled
         {
@@ -77,7 +72,7 @@ namespace Platform.Core.Utilities
         {
             try
             {
-                if (section == configSection.ConnectionConfig)
+                if (section == configSection.AppConfig)
                 {
                     return ConfigurationManager.AppSettings[configKey].ToString();
                 }
@@ -151,8 +146,7 @@ namespace Platform.Core.Utilities
                     MySqlConnection conn = new MySqlConnection(this.ConnectionString);
                     CacheItemPolicy policy = new CacheItemPolicy();
                     policy.AbsoluteExpiration = DateTime.Now.AddMinutes(5);
-                    using (SqlMapper.GridReader multi = conn.QueryMultiple(string.Format(@"
-                                                SELECT * FROM {0}", TABLE_NAME)))
+                    using (SqlMapper.GridReader multi = conn.QueryMultiple(string.Format(@"SELECT * FROM {0}", TABLE_NAME)))
                     {
                         lists = multi.Read<Config>().AsList();
                     }

@@ -1,22 +1,26 @@
-﻿
-
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
 using Platform.Core;
 
 namespace Platform.Base.Link
 {
-    public class Link : BaseModel
+
+
+    //ula_web_bas_link_master
+    //Id,Name,Title,Url,OrderBy,CreatedAt,UpdatedAt,CreatedBy,UpdatedBy,Active,Online,Locked
+    public class Link : LoasModel
     {
+        public string Name { get; set; }
+        public string Title { get; set; }
         public string Url { get; set; }
-        public string Text { get; set; }
+        public string OrderBy { get; set; }
     }
+
 
     // List
 
-    public class LinkList
+    public class Links
     {
-        public LinkList()
+        public Links()
         {
             page = new Paging();
         }
@@ -33,9 +37,9 @@ namespace Platform.Base.Link
         public Link data { get; set; }
     }
 
-    public class rpLinkList : Response
+    public class rpLinks : Response
     {
-        public LinkList data { get; set; }
+        public Links data { get; set; }
     }
 
 }
