@@ -3,3 +3,6 @@ Platform.Base/bin/
 Platform.Core/obj/
 Platform.Base/obj/
 Platform.Data/bin/
+Platform.Data/obj/
+Platform.Test/bin/
+Platform.Test/obj/
