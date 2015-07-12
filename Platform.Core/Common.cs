@@ -1,6 +1,7 @@
-﻿
-namespace Platform.Core
+﻿namespace Platform.Core
 {
+    using System;
+
     public class CoreModel
     {
         public int Id { get; set; }
@@ -8,17 +9,26 @@ namespace Platform.Core
 
     public class BaseModel : CoreModel
     {
-        public string CreatedBy { get; set; }
-        public string UpdatedBy { get; set; }
-        public string CreatedAt { get; set; }
-        public string UpdatedAt { get; set; }
+        public int UpdatedBy { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 
     public class LoasModel : BaseModel
     {
-        public string Online { get; set; }
-        public string Active { get; set; }
-        public string Locked { get; set; }
+        public Boolean Online { get; set; }
+        public Boolean Active { get; set; }
+        public Boolean Locked { get; set; }
+    }
+
+    public class AdminableModel : LoasModel
+    {
+        public int AdminedBy { get; set; }
+        public DateTime AdminedAt { get; set; }
+    }
+
+    public class Fixable : AdminableModel
+    {
+        public int FixId { get; set; }
     }
 
     public class CoreList

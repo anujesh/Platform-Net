@@ -1,13 +1,15 @@
 ﻿using Dapper;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
+using System.Collections.Generic;
 using System.Runtime.Caching;
 
 namespace Platform.Core.Utilities
 {
+
+    
+    using System.Linq;
 
     public interface IConfigManager
     {
@@ -28,21 +30,11 @@ namespace Platform.Core.Utilities
         UserSetting
     }
 
-    public static class ConfigMan : IConfigManager
+    abstract public class ConfigMan : IConfigManager
     {
-        public bool IsESBSwitchEnabled
+        public string DbMigrationFolders
         {
-            get { return GetBoolConfig(configSection.AppConfig, "ESB_Switch_Status"); }
-        }
-
-        public int DaysToRemember
-        {
-            get { return GetIntConfig(configSection.AppConfig, "Days_To_Remember"); }
-        }
-
-        public string ApplicationName
-        {
-            get { return GetStringConfig(configSection.AppConfig, "Application_Name"); }
+            get { return GetStringConfig(configSection.AppConfig, "DbMigrationFolders"); }
         }
 
         public string ConnectionString
@@ -55,18 +47,48 @@ namespace Platform.Core.Utilities
             get { return GetStringConfig(configSection.AppConfig, "DB_Object_Prefix"); }
         }
 
-        public string DbMigrationFolders
-        {
-            get { return GetStringConfig(configSection.AppConfig, "DB_Migration_Folders"); }
-        }
-
         public string DbMigrationBase
         {
             get { return GetStringConfig(configSection.AppConfig, "DB_Migration_Base"); }
         }
 
         #region "Core_Functions"
-        protected abstract List<Config> GetConfigsFromCache();
+        protected virtual List<Config> GetConfigsFromCache()
+        {
+            const string CONFIG_CACHE = "CONFIG_CACHE";
+            const string TABLE_NAME = "";
+
+            ObjectCache cache = MemoryCache.Default;
+            CacheItem cached = cache.GetCacheItem(CONFIG_CACHE);
+
+            List<Config> lists = null;
+
+            if (cached == null)
+            {
+                try
+                {
+                    MySqlConnection conn = new MySqlConnection(this.ConnectionString);
+                    CacheItemPolicy policy = new CacheItemPolicy();
+                    policy.AbsoluteExpiration = DateTime.Now.AddMinutes(5);
+                    using (SqlMapper.GridReader multi = conn.QueryMultiple(string.Format(@"SELECT * FROM {0}", TABLE_NAME)))
+                    {
+                        lists = multi.Read<Config>().AsList();
+                    }
+                    cached = new CacheItem(CONFIG_CACHE, lists);
+                    cache.Set(cached, policy);
+                }
+                catch (Exception ex)
+                {
+                    //Log.Error("Error creating cache from DB", ex);
+                }
+            }
+            else
+            {
+                lists = (List<Config>)cached.Value;
+            }
+
+            return lists;
+        }
         
         protected string GetStringConfig(configSection section, string configKey)
         {
@@ -125,46 +147,6 @@ namespace Platform.Core.Utilities
         public string ConfigValue { get; set; }
         public string Descript { get; set; }
         public DateTime TimeStamp { get; set; }
-    }
-
-    public class ConfigMan : ConfigManager, IConfigManager
-    {
-        protected override List<Config> GetConfigsFromCache()
-        {
-            const string CONFIG_CACHE = "CONFIG_CACHE";
-            const string TABLE_NAME = "";
-
-            ObjectCache cache = MemoryCache.Default;
-            CacheItem cached = cache.GetCacheItem(CONFIG_CACHE);
-
-            List<Config> lists = null;
-
-            if (cached == null)
-            {
-                try
-                {
-                    MySqlConnection conn = new MySqlConnection(this.ConnectionString);
-                    CacheItemPolicy policy = new CacheItemPolicy();
-                    policy.AbsoluteExpiration = DateTime.Now.AddMinutes(5);
-                    using (SqlMapper.GridReader multi = conn.QueryMultiple(string.Format(@"SELECT * FROM {0}", TABLE_NAME)))
-                    {
-                        lists = multi.Read<Config>().AsList();
-                    }
-                    cached = new CacheItem(CONFIG_CACHE, lists);
-                    cache.Set(cached, policy);
-                }
-                catch (Exception ex)
-                {
-                    //Log.Error("Error creating cache from DB", ex);
-                }
-            }
-            else
-            {
-                lists = (List<Config>)cached.Value;
-            }
-
-            return lists;
-        }
     }
 }
 
