@@ -10,4 +10,5 @@ namespace Platform.Core
     {
         Fresh = 0
     }
+
 }

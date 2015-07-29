@@ -27,12 +27,13 @@ namespace Platform.Core
             IDbConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlDB"].ConnectionString);
             return conn;
         }
+
     }
 
     public class BaseRepository<T> where T : class
     {
-        protected string tableName = "~";
-        protected string fieldList = "~";
+        public string tableName = "~";
+        protected string fieldList = "*";
         protected string primaryKey = "~";
         
         public string GetFieldList()
@@ -88,9 +89,13 @@ namespace Platform.Core
             using (var conn = GetOpenConnection())
             {
                 string query = string.Format(@"SELECT * FROM {0} WHERE Id = {1}", tableName, id);
-                output = conn.Query<T>(query).SingleOrDefault();
+                
+                if (conn.Query<T>(query).Count()>0)
+                {
+                    output = conn.Query<T>(query).SingleOrDefault();
+                    output = FindItem(output);
+                }
             }
-            output = FindPost(output);
 
             return output;
         }
@@ -100,15 +105,18 @@ namespace Platform.Core
             T output = null;
             using (var conn = GetOpenConnection())
             {
-                string query = string.Format(@"SELECT {2} FROM {0} WHERE Id = {1}", tableName, ukey, fieldList);
-                output = conn.Query<T>(query).SingleOrDefault();
+                string query = string.Format(@"SELECT {2} FROM {0} WHERE Ukey = '{1}'", tableName, ukey, fieldList);
+                if (conn.Query<T>(query).Count() > 0)
+                {
+                    output = conn.Query<T>(query).SingleOrDefault();
+                    output = FindItem(output);
+                }
             }
-            output = FindPost(output);
 
             return output;
         }
 
-        protected virtual T FindPost(T t)
+        protected virtual T FindItem(T t)
         {
             return t;
         }
@@ -143,6 +151,8 @@ namespace Platform.Core
                 return page;
             }
         }
+
+
 
         public void Remove(int id)
         {

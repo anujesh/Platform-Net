@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace Platform.Core.Utilities
 {
-    public class Bar
+    public static class Bar
     {
-        public string GenerateUKey()
+        public static string GenerateUKey(string prefix, int keyLength = 5)
         {
-            string prefix = "a";
-            int keyLength = 5;
-
             string[] collection = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,1,2,3,4,5,6,7,8,9".Split(',');
 
             Random random = new Random();
