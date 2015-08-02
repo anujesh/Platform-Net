@@ -22,16 +22,8 @@ namespace Platform.Base.Basic
 
     // List
 
-    public class Pages
+    public class Pages : CoreList<Page>
     {
-        public Pages()
-        {
-            page = new Paging();
-        }
-
-        public List<Page> list { get; set; }
-        public Paging page { get; set; }
-        public Summary summ { get; set; }
     }
 
     // Response

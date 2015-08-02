@@ -1,7 +1,4 @@
-﻿
-
-
-namespace Platform.Core
+﻿namespace Platform.Core
 {
     public class HttpStatus
     {

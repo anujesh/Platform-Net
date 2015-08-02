@@ -7,10 +7,11 @@ using System.Linq;
 
 namespace Platform.Core
 {
-    public interface IBaseRepository<T>
+    public interface IBaseRepository<T, TS>
     {
         T Find(int id);
         T Find(string ukey);
+        TS GetAll();
     }
 
     public class DBAccess
@@ -27,10 +28,9 @@ namespace Platform.Core
             IDbConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlDB"].ConnectionString);
             return conn;
         }
-
     }
 
-    public class BaseRepository<T> where T : class
+    public class BaseRepository<T, TS> where T : class where TS : CoreList<T>, new()
     {
         public string tableName = "~";
         protected string fieldList = "*";
@@ -161,6 +161,23 @@ namespace Platform.Core
                 var sqlQuery = string.Format("Delete From {0} Where EmpID = {1}", tableName, id);
                 conn.Execute(sqlQuery);
             }
+        }
+
+        public TS GetAll()
+        {
+            TS lists = new TS();
+
+            using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(string.Format(
+                    @"
+                    SELECT COUNT(*) as Total FROM {0};
+                    SELECT * FROM {0} LIMIT 0, 100000"
+                    , tableName)))
+            {
+                lists.summ = multi.Read<Summary>().Single();
+                lists.list = multi.Read<T>().AsList();
+            }
+
+            return lists;
         }
     }
 }

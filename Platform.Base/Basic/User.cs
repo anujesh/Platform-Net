@@ -14,7 +14,12 @@ namespace Platform.Base.Basic
         Female = 0,
     }
 
-    public class User
+    public interface IUser
+    {
+
+    }
+
+    public class User : IUser
     {
         public string Email { get; set; }
         public string UserName { get; set; }
@@ -32,21 +37,12 @@ namespace Platform.Base.Basic
         public string LastLoginAt { get; set; }
         public string Active { get; set; }
         public string Locked { get; set; }
-
     }
 
     // List
 
-    public class Users
+    public class Users : CoreList<User>
     {
-        public Users()
-        {
-            page = new Paging();
-        }
-
-        public List<User> list { get; set; }
-        public Paging page { get; set; }
-        public Summary summ { get; set; }
     }
 
     // Response

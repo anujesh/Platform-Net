@@ -10,7 +10,7 @@ namespace Platform.Base.Element
 {
     //ula_web_bas_element_master
     //Id,ParentId,Name,Title,Type,DisplayOrder,CreatedAt,UpdatedAt,CreatedBy,UpdatedBy,Active,Online,Locked
-    public class Element : LoasModel
+    public class Element : AloModel
     {
         public string ParentId { get; set; }
         public string Name { get; set; }

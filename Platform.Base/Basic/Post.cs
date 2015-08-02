@@ -14,16 +14,8 @@ namespace Platform.Base.Basic
 
     // List
 
-    public class Posts
+    public class Posts : CoreList<Post>
     {
-        public Posts()
-        {
-            page = new Paging();
-        }
-
-        public List<Post> list { get; set; }
-        public Paging page { get; set; }
-        public Summary summ { get; set; }
     }
 
     // Response

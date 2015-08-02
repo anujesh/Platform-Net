@@ -7,7 +7,7 @@ namespace Platform.Base.Link
 
     //ula_web_bas_link_master
     //Id,Name,Title,Url,OrderBy,CreatedAt,UpdatedAt,CreatedBy,UpdatedBy,Active,Online,Locked
-    public class Link : LoasModel
+    public class Link : AloModel
     {
         public string Name { get; set; }
         public string Title { get; set; }
@@ -18,16 +18,8 @@ namespace Platform.Base.Link
 
     // List
 
-    public class Links
+    public class Links : CoreList<Link>
     {
-        public Links()
-        {
-            page = new Paging();
-        }
-
-        public List<Link> list { get; set; }
-        public Paging page { get; set; }
-        public Summary summ { get; set; }
     }
 
     // Response

@@ -1,6 +1,10 @@
 ﻿namespace Platform.Core
 {
     using System;
+    using System.Collections.Generic;
+
+
+
 
     public class CoreModel
     {
@@ -13,31 +17,41 @@
         public DateTime UpdatedAt { get; set; }
     }
 
-    public class LoasModel : BaseModel
+    
+    public class AloModel : BaseModel
     {
-        public Boolean Online { get; set; }
         public Boolean Active { get; set; }
         public Boolean Locked { get; set; }
+        public Boolean Online { get; set; }
     }
 
-    public class AdminableModel : LoasModel
+    public class AdminModel : AloModel
     {
         public int AdminedBy { get; set; }
         public DateTime AdminedAt { get; set; }
     }
 
-    public class Fixable : AdminableModel
+    public class AdminableModel : BaseModel
+    {
+        public int AdminedBy { get; set; }
+        public DateTime AdminedAt { get; set; }
+    }
+
+    public class Fixable : AdminModel
     {
         public int FixId { get; set; }
     }
 
-    public class CoreList
+
+
+    public class CoreList<T>
     {
         public CoreList()
         {
             page = new Paging();
         }
-        
+
+        public IEnumerable<T> list { get; set; }
         public Paging page { get; set; }
         public Summary summ { get; set; }
     }

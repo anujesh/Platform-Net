@@ -17,9 +17,8 @@ namespace Platform.Base.Basic
 
     // List
 
-    public class Images : CoreList
+    public class Images : CoreList<Image>
     {
-        public List<Image> list { get; set; }
     }
 
     // Response
