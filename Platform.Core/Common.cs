@@ -3,9 +3,6 @@
     using System;
     using System.Collections.Generic;
 
-
-
-
     public class CoreModel
     {
         public int Id { get; set; }
@@ -17,7 +14,6 @@
         public DateTime UpdatedAt { get; set; }
     }
 
-    
     public class AloModel : BaseModel
     {
         public Boolean Active { get; set; }
@@ -31,18 +27,10 @@
         public DateTime AdminedAt { get; set; }
     }
 
-    public class AdminableModel : BaseModel
-    {
-        public int AdminedBy { get; set; }
-        public DateTime AdminedAt { get; set; }
-    }
-
     public class Fixable : AdminModel
     {
         public int FixId { get; set; }
     }
-
-
 
     public class CoreList<T>
     {

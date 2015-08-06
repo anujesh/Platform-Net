@@ -1,9 +1,9 @@
 ﻿using Platform.Core;
 using System.Collections.Generic;
 
-namespace Platform.Base.Basic
+namespace Platform.Core.Basic
 {
-    public class Page : CoreModel
+    public class Page : AdminModel
     {
         public Page()
         {
@@ -28,14 +28,12 @@ namespace Platform.Base.Basic
 
     // Response
 
-    public class rpPage : Response
+    public class rpPage : Response<Page>
     {
-        public Page data { get; set; }
     }
 
-    public class rpPages : Response
+    public class rpPages : Response<Pages>
     {
-        public Pages data { get; set; }
     }
 
     public class vmPage

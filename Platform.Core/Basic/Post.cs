@@ -1,7 +1,7 @@
 ﻿using Platform.Core;
 using System.Collections.Generic;
 
-namespace Platform.Base.Basic
+namespace Platform.Core.Basic
 {
     public class Post : CoreModel
     {
@@ -20,14 +20,11 @@ namespace Platform.Base.Basic
 
     // Response
 
-    public class rpPost : Response
+    public class rpPost : Response<Post>
     {
-        public Post data { get; set; }
     }
 
-    public class rpPosts : Response
+    public class rpPosts : Response<Posts>
     {
-        public Posts data { get; set; }
     }
-
 }

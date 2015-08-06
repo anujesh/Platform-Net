@@ -1,17 +1,17 @@
 ﻿using Dapper;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Linq;
+using Platform.Core.Utilities;
 
 namespace Platform.Core
 {
     public interface IBaseRepository<T, TS>
     {
-        T Find(int id);
+        T FindById(int id);
         T Find(string ukey);
-        TS GetAll();
+        TS GetAll(string where="");
     }
 
     public class DBAccess
@@ -25,12 +25,14 @@ namespace Platform.Core
 
         protected IDbConnection GetConnection()
         {
-            IDbConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlDB"].ConnectionString);
+            IDbConnection conn = new MySqlConnection(ConnectConfig.MySqlDB);
             return conn;
         }
     }
 
-    public class BaseRepository<T, TS> where T : class where TS : CoreList<T>, new()
+    public class BaseRepository<T, TS> : IBaseRepository<T, TS>
+        where T : AdminModel
+        where TS : CoreList<T>, new()
     {
         public string tableName = "~";
         protected string fieldList = "*";
@@ -78,12 +80,11 @@ namespace Platform.Core
 
         protected IDbConnection GetConnection()
         {
-            IDbConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlDB"].ConnectionString);
+            IDbConnection conn = new MySqlConnection(ConnectConfig.MySqlDB);
             return conn;
         }
 
-
-        public T Find(int id)
+        public T FindById(int id)
         {
             T output = null;
             using (var conn = GetOpenConnection())
@@ -152,8 +153,6 @@ namespace Platform.Core
             }
         }
 
-
-
         public void Remove(int id)
         {
             using (var conn = GetOpenConnection())
@@ -163,21 +162,31 @@ namespace Platform.Core
             }
         }
 
-        public TS GetAll()
+        public TS GetAll(string onWhere="")
         {
             TS lists = new TS();
 
+            if (!string.IsNullOrEmpty(onWhere))
+            {
+                onWhere = " AND " + onWhere;
+            }
+
             using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(string.Format(
                     @"
-                    SELECT COUNT(*) as Total FROM {0};
-                    SELECT * FROM {0} LIMIT 0, 100000"
-                    , tableName)))
+                    SELECT COUNT(*) as Total FROM {0} WHERE 1=1 {1};
+                    SELECT * FROM {0} WHERE 1=1 {1} LIMIT 0, 3"
+                    , tableName, onWhere )))
             {
                 lists.summ = multi.Read<Summary>().Single();
                 lists.list = multi.Read<T>().AsList();
             }
 
             return lists;
+        }
+
+        public TS GetSubmittedList()
+        {
+            return GetAll(string.Format("Status={0}", (int)EntryStatus.Submitted));
         }
     }
 }

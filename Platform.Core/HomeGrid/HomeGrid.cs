@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Platform.Core;
 
-namespace Platform.Base.HomeGrid
+namespace Platform.Core.HomeGrid
 {
     public class HomeGrid : CoreModel
     {
@@ -23,28 +23,17 @@ namespace Platform.Base.HomeGrid
 
     // List
 
-    public class HomeGrids
+    public class HomeGrids : CoreList<HomeGrid>
     {
-        public HomeGrids()
-        {
-            page = new Paging();
-        }
-
-        public List<HomeGrid> list { get; set; }
-        public Paging page { get; set; }
-        public Summary summ { get; set; }
     }
 
     // Response
 
-    public class rpHomeGrid : Response
+    public class rpHomeGrid : Response<HomeGrid>
     {
-        public HomeGrid data { get; set; }
     }
 
-    public class rpHomeGrids : Response
+    public class rpHomeGrids : Response<HomeGrids>
     {
-        public HomeGrids data { get; set; }
     }
-
 }

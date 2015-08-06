@@ -9,14 +9,14 @@ using Dapper;
 namespace Platform.Data
 {
 
-    public interface IDBConfig : IConfigManager
+    public interface IDBConfig : ICoreConfigMan
     {
         string DataPath { get; }
         string BackupBasePath { get; }
         string SchemaPath { get; }
     }
 
-    public class DBConfig : ConfigMan, IDBConfig
+    public class DBConfig : CoreConfigMan, IDBConfig
     {
         public string DataPath
         {

@@ -15,7 +15,7 @@ namespace Platform.Data
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(dbCareService));
 
-        private IConfigManager _config;
+        private ICoreConfigMan _config;
 
         string db_prefix = "";
         int fileVersion = 0;
@@ -23,7 +23,7 @@ namespace Platform.Data
 
         public dbCareService
         (
-            IConfigManager config
+            ICoreConfigMan config
         )
         {
             _config = config;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Platform.Core;
 
-namespace Platform.Base.Album
+namespace Platform.Core.Album
 {
 
 
@@ -32,13 +32,11 @@ namespace Platform.Base.Album
 
     // Response
 
-    public class rpAlbum : Response
+    public class rpAlbum : Response<Album>
     {
-        public Album data { get; set; }
     }
 
-    public class rpAlbums : Response
+    public class rpAlbums : Response<Albums>
     {
-        public Albums data { get; set; }
     }
 }

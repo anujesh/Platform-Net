@@ -12,7 +12,20 @@
         public int ErrNo { get; set; }
     }
 
-    public class Response
+    public class ResponseItem<T>
+    {
+        public ResponseItem()
+        {
+            error = 0;
+            status = "OK";
+        }
+
+        public T  data {get; set;}
+        public int error { get; set; }
+        public string status { get; set; }
+    }
+
+    public class Response<T>
     {
         public Response()
         {
@@ -20,6 +33,20 @@
             status = "OK";
         }
 
+        public T data { get; set; }
+        public int error { get; set; }
+        public string status { get; set; }
+    }
+
+    public class ResponseList<Ts>
+    {
+        public ResponseList()
+        {
+            error = 0;
+            status = "OK";
+        }
+
+        public Ts  data {get; set;}
         public int error { get; set; }
         public string status { get; set; }
     }

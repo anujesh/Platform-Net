@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Platform.Core;
 
-namespace Platform.Base.Link
+namespace Platform.Core.Link
 {
 
 
@@ -24,12 +24,12 @@ namespace Platform.Base.Link
 
     // Response
 
-    public class rpLink : Response
+    public class rpLink : Response<Link>
     {
         public Link data { get; set; }
     }
 
-    public class rpLinks : Response
+    public class rpLinks : Response<Links>
     {
         public Links data { get; set; }
     }

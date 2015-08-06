@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Platform.Core;
 
-namespace Platform.Base.Tag
+namespace Platform.Core.Tag
 {
     public class Tag : CoreModel
     {
@@ -28,14 +28,12 @@ namespace Platform.Base.Tag
 
     // Response
 
-    public class rpTag : Response
+    public class rpTag : Response<Tag>
     {
-        public Tag data { get; set; }
     }
 
-    public class rpTags : Response
+    public class rpTags : Response<Tags>
     {
-        public Tags data { get; set; }
     }
 
 }

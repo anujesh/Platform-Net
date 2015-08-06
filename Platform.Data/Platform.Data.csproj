@@ -75,6 +75,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Platform.Base\Platform.Base.csproj">
+      <Project>{e137e48b-34bd-48f2-a8d2-da5a3aa820bc}</Project>
+      <Name>Platform.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Platform.Core\Platform.Core.csproj">
       <Project>{e1fd4bae-baba-44bd-9fdf-aaceb9b3217c}</Project>
       <Name>Platform.Core</Name>

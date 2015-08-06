@@ -1,7 +1,7 @@
 ﻿using Platform.Core;
 using System.Collections.Generic;
 
-namespace Platform.Base.Video
+namespace Platform.Core.Video
 {
     //ula_mda_bas_video_master
     //Id,UpdatedAt,CreatedAt,UpdatedBy,CreatedBy,Active,Locked,Online
@@ -28,14 +28,12 @@ namespace Platform.Base.Video
 
     // Response
 
-    public class rpVideo : Response
+    public class rpVideo : Response<Video>
     {
-        public Video data { get; set; }
     }
 
-    public class rpVideos : Response
+    public class rpVideos : Response<Videos>
     {
-        public Videos data { get; set; }
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Platform.Core;
 
-namespace Platform.Base.Category
+namespace Platform.Core.Category
 {
     public class Category : CoreModel
     {
@@ -29,14 +29,12 @@ namespace Platform.Base.Category
 
     // Response
 
-    public class rpCategory : Response
+    public class rpCategory : Response<Category>
     {
-        public Category data { get; set; }
     }
 
-    public class rpCategories : Response
+    public class rpCategories : Response<Categories>
     {
-        public Categories data { get; set; }
     }
 
 }

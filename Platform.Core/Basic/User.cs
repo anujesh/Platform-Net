@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Platform.Base.Basic
+namespace Platform.Core.Basic
 {
 
     //ula_mem_bas_user_master
@@ -47,14 +47,12 @@ namespace Platform.Base.Basic
 
     // Response
 
-    public class rpUser : Response
+    public class rpUser : Response<User>
     {
-        public User data { get; set; }
     }
 
-    public class rpUsers : Response
+    public class rpUsers : Response<Users>
     {
-        public Users data { get; set; }
     }
 
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Platform.Core;
 
-namespace Platform.Base.Basic
+namespace Platform.Core.Basic
 {
     public class Image : CoreModel
     {
@@ -23,14 +23,12 @@ namespace Platform.Base.Basic
 
     // Response
 
-    public class rpImage : Response
+    public class rpImage : Response<Image>
     {
-        public Image data { get; set; }
     }
 
-    public class rpImages : Response
+    public class rpImages : Response<Images>
     {
-        public Images data { get; set; }
     }
 
 }

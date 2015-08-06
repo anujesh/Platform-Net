@@ -129,12 +129,10 @@ namespace Platform.Core
 
     public class Dmy
     {
-
         public bool IsUpdatableForUser(int entityUserId, int currentUserId)
         {
             return false;
         }
-
 
         public bool IsRequestedActionValid(UserMode curUserMode, EntryStatus curStatus, EntryStatus reqStatus)
         {

@@ -1,17 +1,14 @@
 ﻿using System.Linq;
-using Dapper;
 using Platform.Core;
 
-namespace Platform.Base.Basic
+namespace Platform.Core.Basic
 {
-
     public interface IPageRepository
     {
-        Pages GetAll();
-        Page Find(int id);
-        Page Find(string id);
-        Page Add(Page page);
-        void Remove(int id);
+        //Page Find(int id);
+        //Page Find(string id);
+        //Page Add(Page page);
+        //void Remove(int id);
     }
 
     public class PageRepository : BaseRepository<Page, Pages>, IPageRepository

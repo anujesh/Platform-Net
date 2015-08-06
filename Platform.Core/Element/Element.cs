@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Platform.Core;
 
-namespace Platform.Base.Element
+namespace Platform.Core.Element
 {
     //ula_web_bas_element_master
     //Id,ParentId,Name,Title,Type,DisplayOrder,CreatedAt,UpdatedAt,CreatedBy,UpdatedBy,Active,Online,Locked
