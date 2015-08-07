@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Platform.Core;
+using System.IO;
 
 namespace Platform.Base.Controller
 {
@@ -72,5 +73,26 @@ namespace Platform.Base.Controller
             return respo;
         }
 
+        [HttpGet]
+        public async Task<rpT> FindByUkey(string uKey)
+        {
+            rpT respo = new rpT();
+            log.Info("Action " + typeof(rpT));
+
+            try
+            {
+                //repoT repo = new repoT();
+                T items = await Task.Run<T>(() => repo.Find(uKey));
+                respo.data = items;
+            }
+            catch (Exception ex)
+            {
+                respo.error = 1;
+                respo.status = "Error";
+                log.ErrorFormat("Pages", ex);
+            }
+
+            return respo;
+        }
     }
 }
