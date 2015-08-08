@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Platform.Core.Utilities;
+using Platform.Base;
 
 namespace Platform.Core
 {
@@ -30,7 +31,7 @@ namespace Platform.Core
         }
     }
 
-    public class BaseRepository<T, TS> : IBaseRepository<T, TS>
+    public class BaseRepository<T, TS> : DBAccess, IBaseRepository<T, TS>
         where T : AdminModel
         where TS : CoreList<T>, new()
     {
@@ -71,18 +72,7 @@ namespace Platform.Core
             return output;
         }
 
-        protected IDbConnection GetOpenConnection()
-        {
-            IDbConnection conn = GetConnection();
-            conn.Open();
-            return conn;
-        }
 
-        protected IDbConnection GetConnection()
-        {
-            IDbConnection conn = new MySqlConnection(ConnectConfig.MySqlDB);
-            return conn;
-        }
 
         public T FindById(int id)
         {

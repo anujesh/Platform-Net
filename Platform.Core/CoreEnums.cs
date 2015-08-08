@@ -127,20 +127,20 @@ namespace Platform.Core
     SUPERMAN_ENTRIES
     */
 
-    public class Dmy
+    public static class ActionChecker
     {
-        public bool IsUpdatableForUser(int entityUserId, int currentUserId)
+        public static bool IsUpdatableForUser(int entityUserId, int currentUserId)
         {
             return false;
         }
 
-        public bool IsRequestedActionValid(UserMode curUserMode, EntryStatus curStatus, EntryStatus reqStatus)
+        public static bool IsRequestedActionValid(UserMode curUserMode, EntryStatus curStatus, EntryStatus reqStatus)
         {
             IEnumerable<EntryStatus> outList = GetPossibleActions(curUserMode, curStatus);
             return outList.Any(a => (EntryStatus)a == reqStatus);
         }
 
-        public IEnumerable<EntryStatus> GetPossibleActions(UserMode curUserMode, EntryStatus curStatus)
+        public static IEnumerable<EntryStatus> GetPossibleActions(UserMode curUserMode, EntryStatus curStatus)
         {
             List<EntryStatus> outList = new List<EntryStatus>();
 

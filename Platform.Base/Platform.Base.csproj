@@ -58,6 +58,8 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="PageRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\RequestProvider.cs" />
+    <Compile Include="SimpleRepository.cs" />
     <Compile Include="Support\BaseConfigMan.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -25,6 +25,7 @@
     {
         public int AdminedBy { get; set; }
         public DateTime AdminedAt { get; set; }
+        public EntryStatus Status { get; set; }
     }
 
     public class Fixable : AdminModel

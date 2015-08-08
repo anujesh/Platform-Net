@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Platform.Core;
 using System.IO;
+using Platform.Base.Provider;
 
 namespace Platform.Base.Controller
 {
@@ -26,11 +27,11 @@ namespace Platform.Base.Controller
 
         public BaseApiController(IBaseRepository<T, Ts> _repoT)
         {
+            log.DebugFormat("Type", "");
             repo = _repoT;
         }
 
-        [HttpGet]
-        public async Task<rpTs> List()
+        protected async Task<rpTs> List()
         {
             rpTs respo = new rpTs();
             log.Info("Action " + typeof(rpTs));
@@ -51,8 +52,7 @@ namespace Platform.Base.Controller
             return respo;
         }
 
-        [HttpGet]
-        public async Task<rpT> FindById(int id)
+        protected async Task<rpT> FindById(int id)
         {
             rpT respo = new rpT();
             log.Info("Action " + typeof(rpT));
@@ -73,8 +73,7 @@ namespace Platform.Base.Controller
             return respo;
         }
 
-        [HttpGet]
-        public async Task<rpT> FindByUkey(string uKey)
+        protected async Task<rpT> FindByUkey(string uKey)
         {
             rpT respo = new rpT();
             log.Info("Action " + typeof(rpT));
@@ -93,6 +92,20 @@ namespace Platform.Base.Controller
             }
 
             return respo;
+        }
+
+        protected async Task<int> ActionMove(int id, EntryStatus requestedStage)
+        {
+            T items = await Task.Run<T>(() => repo.FindById(id));
+
+            RequestProvider reqProvider = new RequestProvider();
+
+            if (!ActionChecker.IsRequestedActionValid(reqProvider.UserMode, items.Status, requestedStage))
+            {
+                //throw "Not allowed";
+            }
+
+            return 1;
         }
     }
 }
