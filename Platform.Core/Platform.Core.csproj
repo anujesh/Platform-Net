@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Basic\Album.cs" />
+    <Compile Include="Basic\AppLayout.cs" />
     <Compile Include="Basic\Image.cs" />
     <Compile Include="Basic\Page.cs" />
     <Compile Include="Basic\Post.cs" />
