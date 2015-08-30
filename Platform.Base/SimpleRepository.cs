@@ -14,6 +14,7 @@ namespace Platform.Base
     public interface ISimpleRepository<T>
     {
         List<T> GetAll(string where = "");
+        T GetById(int Id);
     }
 
     public class SimpleRepository<T> : DBAccess, ISimpleRepository<T> where T : AloModel, new() 
@@ -38,6 +39,31 @@ namespace Platform.Base
             }
 
             return list;
+        }
+
+        public virtual T GetById(int Id)
+        {
+            T item; // = new T();
+
+            if (Id == 0)
+            {
+                return new T();
+            }
+            
+            List<T> lists = GetAll();
+/*            if (lists.Where(x => x.Id == Id).Any())
+            {
+                item = lists.Where(x => x.Id == Id).FirstOrDefault();
+            }
+            */
+
+            item = lists.Where(x => x.Id == Id).FirstOrDefault();
+            if (item == null)
+            {
+                item = new T();
+            }
+
+            return item;
         }
     }
 

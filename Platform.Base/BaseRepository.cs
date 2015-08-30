@@ -86,7 +86,7 @@ namespace Platform.Core
                 }
             }
 
-            return output;
+            return DecorateOne(output);
         }
 
         public T Find(string ukey)
@@ -102,7 +102,9 @@ namespace Platform.Core
                 }
             }
 
-            return output;
+            
+
+            return DecorateOne(output);
         }
 
         protected virtual T FindItem(T t)
@@ -169,12 +171,17 @@ namespace Platform.Core
                 lists.list = multi.Read<T>().AsList();
             }
 
-            return DecorateOne(lists);
+            return DecorateAll(lists);
         }
 
-        protected virtual TS DecorateOne(TS lists)
+        protected virtual TS DecorateAll(TS lists)
         {
             return lists;
+        }
+
+        protected virtual T DecorateOne(T item)
+        {
+            return item;
         }
 
         public TS GetSubmittedList()
