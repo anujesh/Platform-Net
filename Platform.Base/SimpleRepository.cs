@@ -39,14 +39,6 @@ namespace Platform.Base
 
             return list;
         }
-
-        public T GetById(int Id)
-        {
-            T item = new T();
-
-            return item;
-        }
-
     }
 
     //public class MyRepository

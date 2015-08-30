@@ -10,7 +10,7 @@ namespace Platform.Core
 {
     public interface IBaseRepository<T, TS>
     {
-        T FindById(int id);
+        T GetById(int id);
         T Find(string ukey);
         TS GetAll(string where="");
     }
@@ -72,9 +72,7 @@ namespace Platform.Core
             return output;
         }
 
-
-
-        public T FindById(int id)
+        public T GetById(int id)
         {
             T output = null;
             using (var conn = GetOpenConnection())
@@ -171,6 +169,11 @@ namespace Platform.Core
                 lists.list = multi.Read<T>().AsList();
             }
 
+            return DecorateOne(lists);
+        }
+
+        protected virtual TS DecorateOne(TS lists)
+        {
             return lists;
         }
 

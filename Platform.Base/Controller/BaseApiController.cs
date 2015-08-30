@@ -60,7 +60,7 @@ namespace Platform.Base.Controller
             try
             {
                 //repoT repo = new repoT();
-                T items = await Task.Run<T>(() => repo.FindById(id));
+                T items = await Task.Run<T>(() => repo.GetById(id));
                 respo.data = items;
             }
             catch (Exception ex)
@@ -96,7 +96,7 @@ namespace Platform.Base.Controller
 
         protected async Task<int> ActionMove(int id, EntryStatus requestedStage)
         {
-            T items = await Task.Run<T>(() => repo.FindById(id));
+            T items = await Task.Run<T>(() => repo.GetById(id));
 
             RequestProvider reqProvider = new RequestProvider();
 
