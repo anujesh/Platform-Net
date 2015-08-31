@@ -15,9 +15,10 @@ namespace Platform.Base
     {
         List<T> GetAll(string where = "");
         T GetById(int Id);
+        T GetByUKey(string uKey);
     }
 
-    public class SimpleRepository<T> : DBAccess, ISimpleRepository<T> where T : AloModel, new() 
+    public class SimpleRepository<T> : DBAccess, ISimpleRepository<T> where T : MapModel, new() 
     {
         public string tableName = "~";
 
@@ -49,15 +50,30 @@ namespace Platform.Base
             {
                 return new T();
             }
-            
+
             List<T> lists = GetAll();
-/*            if (lists.Where(x => x.Id == Id).Any())
-            {
-                item = lists.Where(x => x.Id == Id).FirstOrDefault();
-            }
-            */
 
             item = lists.Where(x => x.Id == Id).FirstOrDefault();
+            if (item == null)
+            {
+                item = new T();
+            }
+
+            return item;
+        }
+
+        public virtual T GetByUKey(string ukey)
+        {
+            T item; // = new T();
+
+            if (ukey == "")
+            {
+                return new T();
+            }
+
+            List<T> lists = GetAll();
+
+            item = lists.Where(x => x.Ukey == ukey).FirstOrDefault();
             if (item == null)
             {
                 item = new T();

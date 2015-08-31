@@ -21,6 +21,11 @@
         public Boolean Online { get; set; }
     }
 
+    public class MapModel : AloModel
+    {
+        public string Ukey { get; set; }
+    }
+
     public class AdminModel : AloModel
     {
         public int AdminedBy { get; set; }
