@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Platform.Core;
-
+﻿
 namespace Platform.Core.Basic
 {
     public class Image : CoreModel

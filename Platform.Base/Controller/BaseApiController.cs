@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Platform.Base.Provider;
+using Platform.Core;
+using System;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Platform.Core;
-using System.IO;
-using Platform.Base.Provider;
 
 namespace Platform.Base.Controller
 {

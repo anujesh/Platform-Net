@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
+﻿using Dapper;
 using Platform.Core;
 using Platform.Core.Utilities;
-using Dapper;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Platform.Data
 {

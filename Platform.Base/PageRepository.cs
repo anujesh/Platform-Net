@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Platform.Core;
-
+﻿
 namespace Platform.Core.Basic
 {
     public interface IPageRepository

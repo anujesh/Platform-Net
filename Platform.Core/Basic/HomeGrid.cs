@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 
-using Platform.Core;
 
 namespace Platform.Core.HomeGrid
 {

@@ -1,12 +1,9 @@
-﻿using Platform.Core.Utilities;
+﻿using Dapper;
+using MySql.Data.MySqlClient;
+using Platform.Core.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Caching;
-using MySql.Data.MySqlClient;
-using Dapper;
 
 namespace Platform.Base.Support
 {

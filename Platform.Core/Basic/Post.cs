@@ -1,6 +1,4 @@
-﻿using Platform.Core;
-using System.Collections.Generic;
-
+﻿
 namespace Platform.Core.Basic
 {
     public class Post : CoreModel

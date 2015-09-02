@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 
-using Platform.Core;
 
 namespace Platform.Core.Tag
 {

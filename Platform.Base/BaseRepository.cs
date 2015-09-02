@@ -1,10 +1,9 @@
 ﻿using Dapper;
 using MySql.Data.MySqlClient;
+using Platform.Core.Utilities;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Platform.Core.Utilities;
-using Platform.Base;
 
 namespace Platform.Core
 {

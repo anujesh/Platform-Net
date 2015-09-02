@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace Platform.Core.Utilities
 {
-    using System.Linq;
     using System.Configuration;
+    using System.Linq;
 
     public interface ICoreConfigMan
     {
