@@ -57,9 +57,14 @@
     <Compile Include="Basic\Element.cs" />
     <Compile Include="Basic\HomeGrid.cs" />
     <Compile Include="Basic\Link.cs" />
+    <Compile Include="Enums\Devices.cs" />
+    <Compile Include="Enums\FilterOperator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Basic\Status.cs" />
     <Compile Include="Basic\Tag.cs" />
+    <Compile Include="Request\IRequestProvider.cs" />
+    <Compile Include="Request\RequestInfo.cs" />
+    <Compile Include="Request\RequestProvider.cs" />
     <Compile Include="Utilities\Bar.cs" />
     <Compile Include="Utilities\CoreConfigMan.cs" />
     <Compile Include="Basic\Video.cs" />
