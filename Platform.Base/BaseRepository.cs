@@ -10,7 +10,9 @@ namespace Platform.Core
     public interface IBaseRepository<T, TS>
     {
         T GetById(int id);
+
         T Find(string ukey);
+
         TS GetAll(string where="");
     }
 
