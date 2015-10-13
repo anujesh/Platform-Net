@@ -21,10 +21,6 @@
         public Boolean Online { get; set; }
     }
 
-    public class MapModel : AloModel
-    {
-        public string Ukey { get; set; }
-    }
 
     public class AdminModel : AloModel
     {
@@ -33,7 +29,12 @@
         public EntryStatus Status { get; set; }
     }
 
-    public class Fixable : AdminModel
+    public class MapModel : AdminModel
+    {
+        public string Ukey { get; set; }
+    }
+
+    public class Fixable : MapModel
     {
         public int FixId { get; set; }
     }
@@ -46,7 +47,9 @@
         }
 
         public IEnumerable<T> list { get; set; }
+
         public Paging page { get; set; }
+
         public Summary summ { get; set; }
     }
 }
