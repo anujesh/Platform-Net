@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Platform.Base;
 using Platform.Core;
 using Platform.Core.Utilities;
 using System;

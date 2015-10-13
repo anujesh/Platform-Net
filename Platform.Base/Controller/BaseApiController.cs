@@ -1,12 +1,13 @@
 ﻿using Platform.Base.Provider;
 using Platform.Core;
+using Platform.Core.Interface;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Platform.Base.Controller
 {
-    public class BaseApiController<T, Ts, rpT, rpTs> : ApiController
+    public class UkeyApiController<T, Ts, rpT, rpTs> : ApiController
         where T : AdminModel
         where Ts : CoreList<T>, new()
         where rpT : Response<T>, new()
@@ -14,14 +15,14 @@ namespace Platform.Base.Controller
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(T));
 
-        protected IBaseRepository<T, Ts> repo;
+        protected IUkeyRepo<T, Ts> repo;
 
-        public BaseApiController() : this(null)
+        public UkeyApiController() : this(null)
         {
 
         }
 
-        public BaseApiController(IBaseRepository<T, Ts> _repoT)
+        public UkeyApiController(IUkeyRepo<T, Ts> _repoT)
         {
             log.DebugFormat("Type", "");
             repo = _repoT;

@@ -1,4 +1,6 @@
 ﻿
+using Platform.Base.Repository;
+
 namespace Platform.Core.Basic
 {
     public interface IPageRepository
@@ -9,7 +11,7 @@ namespace Platform.Core.Basic
         //void Remove(int id);
     }
 
-    public class PageRepository : BaseRepository<Page, Pages>, IPageRepository
+    public class PageRepository : BaseRepo<Page, Pages>, IPageRepository
     {
         public PageRepository()
         {

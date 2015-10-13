@@ -30,6 +30,7 @@ namespace Platform.Core.Enums
         }
 
         public char OperatorKey { get; private set; }
+
         public string OperatorQuery { get; private set; }
     }
 }

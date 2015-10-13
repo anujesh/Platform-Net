@@ -9,6 +9,7 @@
         }
 
         public string Status { get; set; }
+
         public int ErrNo { get; set; }
     }
 
@@ -21,7 +22,9 @@
         }
 
         public T  data {get; set;}
+
         public int error { get; set; }
+
         public string status { get; set; }
     }
 
@@ -64,10 +67,15 @@
         }
 
         public int total { get; set; }
+
         public int pages { get; set; }
+
         public int start { get; set; }
+
         public int limit { get; set; }
+
         public int page { get; set; }
+
         public bool active { get; set; }
     }
 
@@ -85,7 +93,9 @@
     public class DOB
     {
         public int Day { get; set; }
+
         public int Month { get; set; }
+
         public int Year { get; set; }
     }
 

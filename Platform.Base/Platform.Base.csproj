@@ -56,9 +56,12 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Controller\BaseApiController.cs" />
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="DBAccess.cs" />
     <Compile Include="PageRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\RequestProvider.cs" />
+    <Compile Include="Repository\AlonRepo.cs" />
+    <Compile Include="Repository\BaseRepo.cs" />
     <Compile Include="SimpleRepository.cs" />
     <Compile Include="Support\BaseConfigMan.cs" />
   </ItemGroup>
