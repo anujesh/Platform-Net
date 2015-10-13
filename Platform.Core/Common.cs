@@ -6,35 +6,42 @@
     public class CoreModel
     {
         public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 
-    public class BaseModel : CoreModel
+    public class TrakModel : CoreModel
     {
         public int UpdatedBy { get; set; }
+
         public DateTime UpdatedAt { get; set; }
     }
 
-    public class AloModel : BaseModel
+    public class AlonModel : TrakModel
     {
         public Boolean Active { get; set; }
+
         public Boolean Locked { get; set; }
+
         public Boolean Online { get; set; }
     }
 
 
-    public class AdminModel : AloModel
+    public class AdminModel : AlonModel
     {
         public int AdminedBy { get; set; }
+
         public DateTime AdminedAt { get; set; }
+
         public EntryStatus Status { get; set; }
     }
 
-    public class MapModel : AdminModel
+    public class UkeyModel : AdminModel
     {
         public string Ukey { get; set; }
     }
 
-    public class Fixable : MapModel
+    public class Fixyable : UkeyModel
     {
         public int FixId { get; set; }
     }

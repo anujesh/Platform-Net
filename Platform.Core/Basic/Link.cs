@@ -5,7 +5,7 @@ namespace Platform.Core.Link
 
     //ula_web_bas_link_master
     //Id,Name,Title,Url,OrderBy,CreatedAt,UpdatedAt,CreatedBy,UpdatedBy,Active,Online,Locked
-    public class Link : AloModel
+    public class Link : AlonModel
     {
         public string Name { get; set; }
         public string Title { get; set; }

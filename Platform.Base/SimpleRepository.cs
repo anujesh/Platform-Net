@@ -12,7 +12,7 @@ namespace Platform.Base
         T GetByUKey(string uKey);
     }
 
-    public class SimpleRepository<T> : DBAccess, ISimpleRepository<T> where T : MapModel, new() 
+    public class SimpleRepository<T> : DBAccess, ISimpleRepository<T> where T : UkeyModel, new() 
     {
         public string tableName = "~";
 
