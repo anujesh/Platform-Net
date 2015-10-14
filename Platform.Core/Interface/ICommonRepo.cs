@@ -13,7 +13,7 @@ namespace Platform.Core.Interface
 
     // ITrackModel 
 
-    public interface IAlonRepo<T>
+    public interface IAlonRepo<T> : IBaseRepo<T>
     {
         bool Lock(int id);
 
@@ -32,21 +32,25 @@ namespace Platform.Core.Interface
 
 
 
-    public interface IAdminRepo<T>
+    public interface IAdminRepo<T, Ts> : IAlonRepo<T>
     {
         bool SetStatusTo();
 
         bool ValidateStatusChange();
 
         IList<T> GetForModeration();
+
+        Ts GetList();
     }
 
 
-    public interface IUkeyRepo<T, Ts>// : IAdminRepo<T>
+    public interface IUkeyRepo<T, Ts> : IAdminRepo<T, Ts>
     {
         T GetByUKey(string ukey);
 
         bool UpdateUkey(int id, string ukey);
+
+        T Find(string ukey);
     }
 
     public interface IFixyRepo<T, Ts> : IUkeyRepo<T, Ts>

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Platform.Core
 {
-    public class AdminRepo<T, Ts> : AlonRepo<T, Ts>, IAdminRepo<T> where T : AdminModel where Ts : CoreList<T>
+    public class AdminRepo<T, Ts> : AlonRepo<T, Ts>, IAdminRepo<T, Ts> where T : AdminModel where Ts : CoreList<T>, new()
     {
         public IList<T> GetForModeration()
         {
@@ -23,9 +23,14 @@ namespace Platform.Core
         {
             throw new NotImplementedException();
         }
+
+        public Ts GetList()
+        {
+            return new Ts();
+        }
     }
 
-    public class UkeyRepo<T, Ts> : AdminRepo<T, Ts>, IUkeyRepo<T, Ts> where T : UkeyModel where Ts : CoreList<T>
+    public class UkeyRepo<T, Ts> : AdminRepo<T, Ts>, IUkeyRepo<T, Ts> where T : UkeyModel where Ts : CoreList<T>, new()
     {
         public T Find(string ukey)
         {

@@ -8,21 +8,21 @@ using System.Web.Http;
 namespace Platform.Base.Controller
 {
     public class UkeyApiController<T, Ts, rpT, rpTs> : ApiController
-        where T : AdminModel
+        where T : UkeyModel
         where Ts : CoreList<T>, new()
         where rpT : Response<T>, new()
         where rpTs : Response<Ts>, new()
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(T));
 
-        protected IUkeyRepo<T, Ts> repo;
+        protected UkeyRepo<T, Ts> repo;
 
         public UkeyApiController() : this(null)
         {
 
         }
 
-        public UkeyApiController(IUkeyRepo<T, Ts> _repoT)
+        public UkeyApiController(UkeyRepo<T, Ts> _repoT)
         {
             log.DebugFormat("Type", "");
             repo = _repoT;
@@ -36,7 +36,7 @@ namespace Platform.Base.Controller
             try
             {
                 //repoT repo = new repoT();
-                Ts items = await Task.Run<Ts>(() => repo.GetAll());
+                Ts items = await Task.Run<Ts>(() => repo.GetList());
                 respo.data = items;
             }
             catch (Exception ex)
