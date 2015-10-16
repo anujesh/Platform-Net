@@ -21,11 +21,11 @@ namespace Platform.Core.Basic
 
     // Response
 
-    public class rpImage : Response<Image>
+    public class rpImage : ResponseItem<Image>
     {
     }
 
-    public class rpImages : Response<Images>
+    public class rpImages : ResponseItem<Images>
     {
     }
 

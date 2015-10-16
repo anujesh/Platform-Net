@@ -27,11 +27,11 @@ namespace Platform.Core.Tag
 
     // Response
 
-    public class rpTag : Response<Tag>
+    public class rpTag : ResponseItem<Tag>
     {
     }
 
-    public class rpTags : Response<Tags>
+    public class rpTags : ResponseItem<Tags>
     {
     }
 

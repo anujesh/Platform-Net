@@ -28,11 +28,11 @@ namespace Platform.Core.HomeGrid
 
     // Response
 
-    public class rpHomeGrid : Response<HomeGrid>
+    public class rpHomeGrid : ResponseItem<HomeGrid>
     {
     }
 
-    public class rpHomeGrids : Response<HomeGrids>
+    public class rpHomeGrids : ResponseItem<HomeGrids>
     {
     }
 }

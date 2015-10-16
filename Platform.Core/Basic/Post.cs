@@ -18,11 +18,11 @@ namespace Platform.Core.Basic
 
     // Response
 
-    public class rpPost : Response<Post>
+    public class rpPost : ResponseItem<Post>
     {
     }
 
-    public class rpPosts : Response<Posts>
+    public class rpPosts : ResponseItem<Posts>
     {
     }
 }

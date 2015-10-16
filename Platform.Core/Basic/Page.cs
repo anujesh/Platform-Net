@@ -27,11 +27,11 @@ namespace Platform.Core.Basic
 
     // Response
 
-    public class rpPage : Response<Page>
+    public class rpPage : ResponseItem<Page>
     {
     }
 
-    public class rpPages : Response<Pages>
+    public class rpPages : ResponseItem<Pages>
     {
     }
 

@@ -58,9 +58,15 @@
     <Compile Include="Basic\HomeGrid.cs" />
     <Compile Include="Basic\Link.cs" />
     <Compile Include="Enums\Devices.cs" />
+    <Compile Include="Enums\EntryStatus.cs" />
+    <Compile Include="Enums\Extensions.cs" />
     <Compile Include="Enums\FilterOperator.cs" />
+    <Compile Include="Enums\UserMode.cs" />
+    <Compile Include="Interface\AdminListing.cs" />
     <Compile Include="Interface\ICommonRepo.cs" />
+    <Compile Include="Interface\ISystemListing.cs" />
     <Compile Include="Interface\IUkeyServ.cs" />
+    <Compile Include="Interface\IUserListing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Basic\Status.cs" />
     <Compile Include="Basic\Tag.cs" />

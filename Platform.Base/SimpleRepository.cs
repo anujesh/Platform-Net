@@ -8,7 +8,9 @@ namespace Platform.Base
     public interface ISimpleRepository<T>
     {
         List<T> GetAll(string where = "");
+
         T GetById(int Id);
+
         T GetByUKey(string uKey);
     }
 

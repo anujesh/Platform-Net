@@ -1,11 +1,10 @@
 ﻿using Dapper;
 using Platform.Core;
+using Platform.Core.Enums;
 using Platform.Core.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Platform.Base.Repository
 {
@@ -24,6 +23,7 @@ namespace Platform.Base.Repository
             {
                 ss = ss + prop.Name;
             }
+
             return ss;
         }
 
@@ -111,7 +111,7 @@ namespace Platform.Base.Repository
             }
         }
 
-        public TS GetAll(string onWhere = "")
+        public TS GetList(string onWhere = "")
         {
             TS lists = new TS();
 
@@ -145,7 +145,7 @@ namespace Platform.Base.Repository
 
         public TS GetSubmittedList()
         {
-            return GetAll(string.Format("Status={0}", (int)EntryStatus.Submitted));
+            return GetList(string.Format("Status={0}", (int)EntryStatus.Submitted));
         }
 
         public T GetByName(string name)
@@ -153,9 +153,24 @@ namespace Platform.Base.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetItems(string onWhere = "")
         {
-            throw new NotImplementedException();
+            IEnumerable<T> lists = null;// = new IList<T>();
+
+            if (!string.IsNullOrEmpty(onWhere))
+            {
+                onWhere = " AND " + onWhere;
+            }
+
+            using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(string.Format(
+                    @"
+                    SELECT * FROM {0} WHERE 1=1 {1} LIMIT 0, 3"
+                    , tableName, onWhere)))
+            {
+                lists = multi.Read<T>().AsList();
+            }
+
+            return lists; // DecorateAll(lists);
         }
     }
 }

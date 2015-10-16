@@ -28,11 +28,11 @@ namespace Platform.Core.Category
 
     // Response
 
-    public class rpCategory : Response<Category>
+    public class rpCategory : ResponseItem<Category>
     {
     }
 
-    public class rpCategories : Response<Categories>
+    public class rpCategories : ResponseItem<Categories>
     {
     }
 

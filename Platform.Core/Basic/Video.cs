@@ -27,11 +27,11 @@ namespace Platform.Core.Video
 
     // Response
 
-    public class rpVideo : Response<Video>
+    public class rpVideo : ResponseItem<Video>
     {
     }
 
-    public class rpVideos : Response<Videos>
+    public class rpVideos : ResponseItem<Videos>
     {
     }
 

@@ -45,11 +45,11 @@ namespace Platform.Core.Basic
 
     // Response
 
-    public class rpUser : Response<User>
+    public class rpUser : ResponseItem<User>
     {
     }
 
-    public class rpUsers : Response<Users>
+    public class rpUsers : ResponseItem<Users>
     {
     }
 

@@ -26,7 +26,7 @@ namespace Platform.Core
 
         public Ts GetList()
         {
-            return new Ts();
+            return base.GetList();
         }
     }
 

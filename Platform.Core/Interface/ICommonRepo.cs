@@ -8,7 +8,7 @@ namespace Platform.Core.Interface
 
         T GetByName(string name);
 
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetItems(string where = "");
     }
 
     // ITrackModel 

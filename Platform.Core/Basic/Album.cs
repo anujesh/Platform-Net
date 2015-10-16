@@ -31,11 +31,11 @@ namespace Platform.Core.Album
 
     // Response
 
-    public class rpAlbum : Response<Album>
+    public class rpAlbum : ResponseItem<Album>
     {
     }
 
-    public class rpAlbums : Response<Albums>
+    public class rpAlbums : ResponseItem<Albums>
     {
     }
 }

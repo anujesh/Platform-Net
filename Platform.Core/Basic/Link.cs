@@ -22,12 +22,12 @@ namespace Platform.Core.Link
 
     // Response
 
-    public class rpLink : Response<Link>
+    public class rpLink : ResponseItem<Link>
     {
         public Link data { get; set; }
     }
 
-    public class rpLinks : Response<Links>
+    public class rpLinks : ResponseItem<Links>
     {
         public Links data { get; set; }
     }

@@ -1,18 +1,5 @@
 ﻿namespace Platform.Core
 {
-    public class HttpStatus
-    {
-        public HttpStatus()
-        {
-            Status = "OK";
-            ErrNo = 0;
-        }
-
-        public string Status { get; set; }
-
-        public int ErrNo { get; set; }
-    }
-
     public class ResponseItem<T>
     {
         public ResponseItem()
@@ -21,23 +8,10 @@
             status = "OK";
         }
 
-        public T  data {get; set;}
-
-        public int error { get; set; }
-
-        public string status { get; set; }
-    }
-
-    public class Response<T>
-    {
-        public Response()
-        {
-            error = 0;
-            status = "OK";
-        }
-
         public T data { get; set; }
+
         public int error { get; set; }
+
         public string status { get; set; }
     }
 
@@ -50,7 +24,9 @@
         }
 
         public Ts  data {get; set;}
+
         public int error { get; set; }
+
         public string status { get; set; }
     }
 

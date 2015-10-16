@@ -4,110 +4,22 @@ using System.Linq;
 
 namespace Platform.Core
 {
+    using Enums;
     using System.ComponentModel;
     using System.Reflection;
 
-    public enum UserMode
-    {
-        [Description("Unknown")]
-        Unknown = 0,
-
-        [Description("User")]
-        User = 1,
-
-        [Description("Admin")]
-        Admin = 2,
-
-        [Description("Superman")]
-        Superman = 3,
-
-        [Description("System")]
-        System = 4
-    }
-
-    public enum EntryStatus
-    {
-        [Description("Fresh")]
-        Fresh = 0,
-
-        [Description("Submitted")]
-        Submitted = 1,
-
-        [Description("Approved")]
-        Approved = 2,
-
-        [Description("Declined")] // submit again
-        Declined = 3,
-
-        [Description("Rejected")] // no way
-        Rejected = 4,
-
-        [Description("Published")]
-        Published = 5,
-
-        [Description("Deleted")]
-        Deleted = 6,
-
-        [Description("Removed")]
-        Removed = 7,
-
-        [Description("Archived")]
-        Archived = 8,
-
-        [Description("Edited")]
-        Edited = 9
-    }
-
-    public static class Extensions
-    {
-        public static string GetDescription(this Enum value)
-        {
-            Type type = value.GetType();
-            string name = Enum.GetName(type, value);
-            if (name != null)
-            {
-                FieldInfo field = type.GetField(name);
-                if (field != null)
-                {
-                    DescriptionAttribute attr = Attribute.GetCustomAttribute(field,
-                        typeof(DescriptionAttribute)) as DescriptionAttribute;
-                    if (attr != null)
-                    {
-                        return attr.Description;
-                    }
-                }
-            }
-            return null;
-        }
-    }
 
 
-    public interface SystemListing<T>
-    {
-        List<T> GetApprovedList();
 
-        List<T> GetRemovedList();
 
-        List<T> GetOtherList();
-    }
 
-    public interface UserListing<T>
-    {
-        List<T> GetFreshList();
 
-        List<T> GetPublishedList();
 
-        List<T> GetRejectedList();
 
-        List<T> GetOtherList();
-    }
 
-    public interface AdminListing<T>
-    {
-        List<T> GetSubmittedList();
 
-        List<T> GetDeletedList();
-    }
+
+
 
     public class BaseRepository2<T> where T : class
     {

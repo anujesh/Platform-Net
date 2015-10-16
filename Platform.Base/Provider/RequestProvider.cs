@@ -1,4 +1,5 @@
 ﻿using Platform.Core;
+using Platform.Core.Enums;
 
 namespace Platform.Base.Provider
 {

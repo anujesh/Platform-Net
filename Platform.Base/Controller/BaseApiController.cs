@@ -1,5 +1,6 @@
 ﻿using Platform.Base.Provider;
 using Platform.Core;
+using Platform.Core.Enums;
 using Platform.Core.Interface;
 using System;
 using System.Threading.Tasks;
@@ -10,19 +11,14 @@ namespace Platform.Base.Controller
     public class UkeyApiController<T, Ts, rpT, rpTs> : ApiController
         where T : UkeyModel
         where Ts : CoreList<T>, new()
-        where rpT : Response<T>, new()
-        where rpTs : Response<Ts>, new()
+        where rpT : ResponseItem<T>, new()
+        where rpTs : ResponseItem<Ts>, new()
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(T));
 
-        protected UkeyRepo<T, Ts> repo;
+        protected IUkeyRepo<T, Ts> repo;
 
-        public UkeyApiController() : this(null)
-        {
-
-        }
-
-        public UkeyApiController(UkeyRepo<T, Ts> _repoT)
+        public UkeyApiController(IUkeyRepo<T, Ts> _repoT)
         {
             log.DebugFormat("Type", "");
             repo = _repoT;
@@ -35,7 +31,6 @@ namespace Platform.Base.Controller
 
             try
             {
-                //repoT repo = new repoT();
                 Ts items = await Task.Run<Ts>(() => repo.GetList());
                 respo.data = items;
             }
