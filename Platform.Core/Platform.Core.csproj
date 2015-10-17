@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basic\AdminLayout.cs" />
     <Compile Include="Basic\Album.cs" />
     <Compile Include="Basic\AppLayout.cs" />
     <Compile Include="Basic\Image.cs" />

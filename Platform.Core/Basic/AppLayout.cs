@@ -11,7 +11,9 @@ namespace Platform.Core.Basic
         }
 
         public string _Title { get; set; }
+
         public string _Descript { get; set; }
+
         public string _Keywords { get; set; }
     }
 }
