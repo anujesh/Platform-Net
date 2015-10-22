@@ -8,9 +8,8 @@ using System.Linq;
 
 namespace Platform.Base.Repository
 {
-    public class BaseRepo<T, TS> : DBAccess, IBaseRepo<T>
+    public class CoreRepo<T> : DBAccess, ICoreRepo<T>
         where T : CoreModel
-        where TS : CoreList<T>, new()
     {
         public string tableName = "~";
         protected string fieldList = "*";
@@ -64,7 +63,9 @@ namespace Platform.Base.Repository
                 }
             }
 
-            return DecorateOne(output);
+            return output;
+
+            //return DecorateOne(output);
         }
 
         protected virtual T FindItem(T t)
@@ -111,42 +112,9 @@ namespace Platform.Base.Repository
             }
         }
 
-        public TS GetList(string onWhere = "")
-        {
-            TS lists = new TS();
+  
 
-            if (!string.IsNullOrEmpty(onWhere))
-            {
-                onWhere = " AND " + onWhere;
-            }
 
-            using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(string.Format(
-                    @"
-                    SELECT COUNT(*) as Total FROM {0} WHERE 1=1 {1};
-                    SELECT * FROM {0} WHERE 1=1 {1} LIMIT 0, 3"
-                    , tableName, onWhere)))
-            {
-                lists.summ = multi.Read<Summary>().Single();
-                lists.list = multi.Read<T>().AsList();
-            }
-
-            return DecorateAll(lists);
-        }
-
-        protected virtual TS DecorateAll(TS lists)
-        {
-            return lists;
-        }
-
-        protected virtual T DecorateOne(T item)
-        {
-            return item;
-        }
-
-        public TS GetSubmittedList()
-        {
-            return GetList(string.Format("Status={0}", (int)EntryStatus.Submitted));
-        }
 
         public T GetByName(string name)
         {

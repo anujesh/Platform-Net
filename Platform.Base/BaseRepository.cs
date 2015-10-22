@@ -7,6 +7,8 @@ using System.Linq;
 
 namespace Platform.Core
 {
+
+
     public class AdminRepo<T, Ts> : AlonRepo<T, Ts>, IAdminRepo<T, Ts> where T : AdminModel where Ts : CoreList<T>, new()
     {
         public IList<T> GetForModeration()

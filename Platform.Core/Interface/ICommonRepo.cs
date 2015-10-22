@@ -2,7 +2,7 @@
 
 namespace Platform.Core.Interface
 {
-    public interface IBaseRepo<T>
+    public interface ICoreRepo<T>
     {
         T GetById(int id);
 
@@ -13,7 +13,7 @@ namespace Platform.Core.Interface
 
     // ITrackModel 
 
-    public interface IAlonRepo<T> : IBaseRepo<T>
+    public interface IAlonRepo<T> : ICoreRepo<T>
     {
         bool Lock(int id);
 

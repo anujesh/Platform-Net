@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Platform.Base
 {
-    public interface ISimpleRepository<T>
+    public interface ISimpleUkeyRepo<T>
     {
         List<T> GetAll(string where = "");
 
@@ -14,7 +14,7 @@ namespace Platform.Base
         T GetByUKey(string uKey);
     }
 
-    public class SimpleRepository<T> : DBAccess, ISimpleRepository<T> where T : UkeyModel, new() 
+    public class SimpleUkeyRepo<T> : DBAccess, ISimpleUkeyRepo<T> where T : UkeyModel, new() 
     {
         public string tableName = "~";
 
