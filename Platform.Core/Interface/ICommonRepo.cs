@@ -11,9 +11,16 @@ namespace Platform.Core.Interface
         IEnumerable<T> GetItems(string where = "");
     }
 
-    // ITrackModel 
+    public interface IUkeyRepository<T> : ICoreRepo<T>
+    {
+        T GetByUKey(string ukey);
 
-    public interface IAlonRepo<T> : ICoreRepo<T>
+        bool UpdateUkey(int id, string ukey);
+
+        T Find(string ukey);
+    }
+
+    public interface IAlonRepository<T, Ts> : IUkeyRepository<T>
     {
         bool Lock(int id);
 
@@ -28,32 +35,20 @@ namespace Platform.Core.Interface
         bool SetOffLine(int id);
 
         IEnumerable<T> GetAllDeleted();
+
+        Ts GetList();
     }
 
-
-
-    public interface IAdminRepo<T, Ts> : IAlonRepo<T>
+    public interface IAdminRepository<T, Ts> : IAlonRepository<T, Ts>
     {
         bool SetStatusTo();
 
         bool ValidateStatusChange();
 
         IList<T> GetForModeration();
-
-        Ts GetList();
     }
 
-
-    public interface IUkeyRepo<T, Ts> : IAdminRepo<T, Ts>
-    {
-        T GetByUKey(string ukey);
-
-        bool UpdateUkey(int id, string ukey);
-
-        T Find(string ukey);
-    }
-
-    public interface IFixyRepo<T, Ts> : IUkeyRepo<T, Ts>
+    public interface IFixyRepository<T, Ts> : IAdminRepository<T, Ts>
     {
         bool FixById(int thisId, int correctId);
     }

@@ -9,7 +9,7 @@ using System.Web.Http;
 namespace Platform.Base.Controller
 {
     public class UkeyApiController<T, Ts, rpT, rpTs> : ApiController
-        where T : UkeyModel
+        where T : UkeyModelToRemove
         where Ts : CoreList<T>, new()
         where rpT : ResponseItem<T>, new()
         where rpTs : ResponseItem<Ts>, new()

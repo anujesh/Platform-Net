@@ -14,7 +14,7 @@ namespace Platform.Base
         T GetByUKey(string uKey);
     }
 
-    public class SimpleUkeyRepo<T> : DBAccess, ISimpleUkeyRepo<T> where T : UkeyModel, new() 
+    public class SimpleUkeyRepo<T> : DBAccess, ISimpleUkeyRepo<T> where T : UkeyModelToRemove, new() 
     {
         public string tableName = "~";
 

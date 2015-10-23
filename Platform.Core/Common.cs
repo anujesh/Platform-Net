@@ -48,12 +48,12 @@
         public EntryStatus Status { get; set; }
     }
 
-    public class UkeyModel : AdminModel
+    public class UkeyModelToRemove : AdminModel
     {
         public string Ukey { get; set; }
     }
 
-    public class FixyModel : UkeyModel
+    public class FixyModel : UkeyModelToRemove
     {
         public int FixId { get; set; }
     }

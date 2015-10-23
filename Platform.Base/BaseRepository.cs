@@ -9,7 +9,7 @@ namespace Platform.Core
 {
 
 
-    public class AdminRepo<T, Ts> : AlonRepo<T, Ts>, IAdminRepo<T, Ts> where T : AdminModel where Ts : CoreList<T>, new()
+    public class AdminRepo<T, Ts> : AlonRepo<T, Ts>, IAdminRepository<T, Ts> where T : AdminModel where Ts : CoreList<T>, new()
     {
         public IList<T> GetForModeration()
         {
@@ -32,7 +32,7 @@ namespace Platform.Core
         }
     }
 
-    public class UkeyRepo<T, Ts> : AdminRepo<T, Ts>, IUkeyRepo<T, Ts> where T : UkeyModel where Ts : CoreList<T>, new()
+    public class UkeyRepo<T, Ts> : AdminRepo<T, Ts>, IUkeyRepo<T, Ts> where T : UkeyModelToRemove where Ts : CoreList<T>, new()
     {
         public T Find(string ukey)
         {
