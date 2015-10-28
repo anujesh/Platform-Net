@@ -1,25 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Platform.Core
 {
     using Enums;
-    using System.ComponentModel;
-    using System.Reflection;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public class BaseRepository2<T> where T : class
     {

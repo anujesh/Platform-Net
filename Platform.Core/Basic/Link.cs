@@ -1,8 +1,6 @@
-﻿
-namespace Platform.Core.Link
+﻿namespace Platform.Core.Link
 {
-
-
+    
     //ula_web_bas_link_master
     //Id,Name,Title,Url,OrderBy,CreatedAt,UpdatedAt,CreatedBy,UpdatedBy,Active,Online,Locked
     public class Link : AlonModel

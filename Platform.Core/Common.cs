@@ -22,20 +22,22 @@
         public string Name { get; set; }
     }
 
-    public class TrakModel : CoreModel
+    public class UkeyModel : CoreModel
     {
+        public string Ukey { get; set; }
+
         public int UpdatedBy { get; set; }
 
         public DateTime UpdatedAt { get; set; }
     }
 
-    public class AlonModel : TrakModel
+    public class AlonModel : UkeyModel
     {
-        public Boolean Active { get; set; }
+        public bool Active { get; set; }
 
-        public Boolean Locked { get; set; }
+        public bool Locked { get; set; }
 
-        public Boolean Online { get; set; }
+        public bool Online { get; set; }
     }
 
 
@@ -48,12 +50,12 @@
         public EntryStatus Status { get; set; }
     }
 
-    public class UkeyModelToRemove : AdminModel
+    public class UkeyModelToRemove
     {
         public string Ukey { get; set; }
     }
 
-    public class FixyModel : UkeyModelToRemove
+    public class FixyModel : AdminModel
     {
         public int FixId { get; set; }
     }

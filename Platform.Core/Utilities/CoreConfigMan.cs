@@ -118,9 +118,13 @@ namespace Platform.Core.Utilities
     public class Config
     {
         public string Section { get; set; }
+
         public string ConfigKey { get; set; }
+
         public string ConfigValue { get; set; }
+
         public string Descript { get; set; }
+
         public DateTime TimeStamp { get; set; }
     }
 }

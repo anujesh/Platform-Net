@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Platform.Base.Repository
 {
-    public class CoreRepo<T> : DBAccess, ICoreRepo<T>
+    public class CoreRepository<T> : DBAccess, ICoreRepository<T>
         where T : CoreModel
     {
         public string tableName = "~";
@@ -67,6 +67,27 @@ namespace Platform.Base.Repository
 
             //return DecorateOne(output);
         }
+
+        // cache able ?
+        //public virtual T GetById(int Id)
+        //{
+        //    T item; // = new T();
+
+        //    if (Id == 0)
+        //    {
+        //        return new T();
+        //    }
+
+        //    List<T> lists = GetAll();
+
+        //    item = lists.Where(x => x.Id == Id).FirstOrDefault();
+        //    if (item == null)
+        //    {
+        //        item = new T();
+        //    }
+
+        //    return item;
+        //}
 
         protected virtual T FindItem(T t)
         {
@@ -140,5 +161,25 @@ namespace Platform.Base.Repository
 
             return lists; // DecorateAll(lists);
         }
+
+        //public virtual List<T> GetItems(string onWhere = "")
+        //{
+        //    List<T> list = new List<T>();
+
+        //    if (!string.IsNullOrEmpty(onWhere))
+        //    {
+        //        onWhere = " AND " + onWhere;
+        //    }
+
+        //    using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(string.Format(
+        //            @"
+        //            SELECT * FROM {0} WHERE 1=1 {1}"
+        //            , tableName, onWhere)))
+        //    {
+        //        list = multi.Read<T>().AsList();
+        //    }
+
+        //    return list;
+        //}
     }
 }

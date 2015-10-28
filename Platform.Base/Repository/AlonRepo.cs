@@ -7,8 +7,8 @@ using Platform.Core.Interface;
 
 namespace Platform.Base.Repository
 {
-
-    public class AlonRepo<T, TS> : CoreRepo<T>, IAlonRepo<T> where T : AlonModel where TS : CoreList<T>, new()
+    //public interface IAlonRepository<T, Ts> : IUkeyRepository<T> where T : AlonModel where Ts : CoreList<AlonModel>, new()
+    public class AlonRepository<T, Ts> : UkeyRepository<T, Ts>, IAlonRepository<T, Ts> where Ts : CoreList<T>, new() where T : AlonModel, new()
     {
         public bool Delete(int id)
         {
@@ -45,19 +45,16 @@ namespace Platform.Base.Repository
             throw new NotImplementedException();
         }
 
-        protected virtual TS DecorateAll(TS lists)
-        {
-            return lists;
-        }
+
 
         protected virtual T DecorateOne(T item)
         {
             return item;
         }
 
-        public TS GetList(string onWhere = "")
+        public Ts GetList(string onWhere = "")
         {
-            TS lists = new TS();
+            Ts lists = new Ts();
 
             if (!string.IsNullOrEmpty(onWhere))
             {
@@ -76,6 +73,11 @@ namespace Platform.Base.Repository
 
             return DecorateAll(lists);
 
+        }
+
+        public Ts GetList()
+        {
+            throw new NotImplementedException();
         }
     }
 }

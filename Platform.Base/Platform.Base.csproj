@@ -57,13 +57,14 @@
     <Compile Include="Controller\BaseApiController.cs" />
     <Compile Include="BaseRepository.cs" />
     <Compile Include="DBAccess.cs" />
+    <Compile Include="Interfaces.cs" />
     <Compile Include="PageRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\RequestProvider.cs" />
-    <Compile Include="Repository\AdminRepo.cs" />
+    <Compile Include="Repository\AdminRepository.cs" />
     <Compile Include="Repository\AlonRepo.cs" />
-    <Compile Include="Repository\CoreRepo.cs" />
-    <Compile Include="Repository\TrakRepo.cs" />
+    <Compile Include="Repository\CoreRepository.cs" />
+    <Compile Include="Repository\UkeyRepository.cs" />
     <Compile Include="SimpleRepository.cs" />
     <Compile Include="Support\BaseConfigMan.cs" />
   </ItemGroup>

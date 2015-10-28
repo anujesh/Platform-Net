@@ -1,7 +1,5 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-
 
 namespace Platform.Core.HomeGrid
 {

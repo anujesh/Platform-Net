@@ -25,8 +25,8 @@ namespace Platform.Core.Enums
     {
         internal OperaterMapAttribute(char key, string field, string query = "")
         {
-            this.OperatorKey = key;
-            this.OperatorQuery = query;
+            OperatorKey = key;
+            OperatorQuery = query;
         }
 
         public char OperatorKey { get; private set; }

@@ -1,8 +1,4 @@
-﻿
-
-
-
-namespace Platform.Core.Status
+﻿namespace Platform.Core.Status
 {
     public class Status : CoreModel
     {

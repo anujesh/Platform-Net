@@ -2,25 +2,26 @@
 
 namespace Platform.Core.Interface
 {
-    public interface ICoreRepo<T>
+    using Platform.Core.Enums;
+
+    public interface ICoreRepository<T>
     {
         T GetById(int id);
 
         T GetByName(string name);
 
         IEnumerable<T> GetItems(string where = "");
+
+        //List<T> GetItems(string where = "");
     }
 
-    public interface IUkeyRepository<T> : ICoreRepo<T>
+    public interface IUkeyRepository<T> : ICoreRepository<T> where T : UkeyModel
     {
         T GetByUKey(string ukey);
-
-        bool UpdateUkey(int id, string ukey);
-
-        T Find(string ukey);
+        //T Find(string uKey);
     }
 
-    public interface IAlonRepository<T, Ts> : IUkeyRepository<T>
+    public interface IAlonRepository<T, Ts> : IUkeyRepository<T> where T : AlonModel where Ts : CoreList<T>
     {
         bool Lock(int id);
 
@@ -39,16 +40,15 @@ namespace Platform.Core.Interface
         Ts GetList();
     }
 
-    public interface IAdminRepository<T, Ts> : IAlonRepository<T, Ts>
+    public interface IAdminRepository<T, Ts> : IAlonRepository<T, Ts> where T : AdminModel where Ts : CoreList<T>
     {
-        bool SetStatusTo();
+        bool SetStatusTo(EntryStatus newStatus);
 
-        bool ValidateStatusChange();
-
-        IList<T> GetForModeration();
+        Ts GetForModeration();
+        
     }
 
-    public interface IFixyRepository<T, Ts> : IAdminRepository<T, Ts>
+    public interface IFixyRepository<T, Ts> : IAdminRepository<T, Ts> where T : FixyModel where Ts : CoreList<T>
     {
         bool FixById(int thisId, int correctId);
     }

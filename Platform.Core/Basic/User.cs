@@ -2,7 +2,6 @@
 
 namespace Platform.Core.Basic
 {
-
     //ula_mem_bas_user_master
     //Id,Email,UserName,Password,RememberToken,Activity,Points,Rank,ProfileImage,Gender,DofB,MofB,YofB,LastIp,LoginCount,LastLoginAt,UpdatedAt,CreatedAt,UpdatedBy,CreatedBy,Active,Locked
 

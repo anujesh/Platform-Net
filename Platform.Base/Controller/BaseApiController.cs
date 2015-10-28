@@ -1,27 +1,27 @@
-﻿using Platform.Base.Provider;
+﻿using System;
+using System.Threading.Tasks;
+using System.Web.Http;
+using Platform.Base.Provider;
 using Platform.Core;
 using Platform.Core.Enums;
 using Platform.Core.Interface;
-using System;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Platform.Base.Controller
 {
-    public class UkeyApiController<T, Ts, rpT, rpTs> : ApiController
-        where T : UkeyModelToRemove
+    public class AdminApiController<T, Ts, rpT, rpTs> : ApiController
+        where T : AdminModel
         where Ts : CoreList<T>, new()
         where rpT : ResponseItem<T>, new()
         where rpTs : ResponseItem<Ts>, new()
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(T));
 
-        protected IUkeyRepo<T, Ts> repo;
+        protected IAdminRepository<T, Ts> _repo;
 
-        public UkeyApiController(IUkeyRepo<T, Ts> _repoT)
+        public AdminApiController(IAdminRepository<T, Ts> repoT)
         {
             log.DebugFormat("Type", "");
-            repo = _repoT;
+            _repo = repoT;
         }
 
         protected async Task<rpTs> List()
@@ -31,8 +31,8 @@ namespace Platform.Base.Controller
 
             try
             {
-                Ts items = await Task.Run<Ts>(() => repo.GetList());
-                respo.data = items;
+                Ts listTs = await Task.Run<Ts>(() => _repo.GetList());
+                respo.data = listTs;
             }
             catch (Exception ex)
             {
@@ -52,7 +52,7 @@ namespace Platform.Base.Controller
             try
             {
                 //repoT repo = new repoT();
-                T items = await Task.Run<T>(() => repo.GetById(id));
+                T items = await Task.Run<T>(() => _repo.GetById(id));
                 respo.data = items;
             }
             catch (Exception ex)
@@ -73,8 +73,8 @@ namespace Platform.Base.Controller
             try
             {
                 //repoT repo = new repoT();
-                T items = await Task.Run<T>(() => repo.Find(uKey));
-                respo.data = items;
+                T item = await Task.Run<T>(() => _repo.GetByUKey(uKey));
+                respo.data = item;
             }
             catch (Exception ex)
             {
@@ -88,7 +88,7 @@ namespace Platform.Base.Controller
 
         protected async Task<int> ActionMove(int id, EntryStatus requestedStage)
         {
-            T items = await Task.Run<T>(() => repo.GetById(id));
+            T items = await Task.Run<T>(() => _repo.GetById(id));
 
             RequestProvider reqProvider = new RequestProvider();
 

@@ -11,7 +11,7 @@ namespace Platform.Core.Basic
         //void Remove(int id);
     }
 
-    public class PageRepository : AdminRepo<Page, Pages>, IPageRepository
+    public class PageRepository : AdminRepository<Page, Pages>, IPageRepository
     {
         public PageRepository()
         {

@@ -1,5 +1,4 @@
-﻿
-namespace Platform.Core.Basic
+﻿namespace Platform.Core.Basic
 {
     public class Image : CoreModel
     {
