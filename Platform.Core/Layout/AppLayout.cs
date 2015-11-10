@@ -1,4 +1,4 @@
-﻿namespace Platform.Core.Basic
+﻿namespace Platform.Core.Layout
 {
     public class AppLayout
     {

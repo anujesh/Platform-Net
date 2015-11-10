@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Platform.Core.Tag
+namespace Platform.Core.Basic
 {
     public class Tag : CoreModel
     {
@@ -10,16 +10,8 @@ namespace Platform.Core.Tag
 
     // List
 
-    public class Tags
+    public class Tags : CoreList<Tag>
     {
-        public Tags()
-        {
-            page = new Paging();
-        }
-
-        public List<Tag> list { get; set; }
-        public Paging page { get; set; }
-        public Summary summ { get; set; }
     }
 
     // Response

@@ -72,12 +72,11 @@ namespace Platform.Base.Repository
             }
 
             return DecorateAll(lists);
-
         }
 
-        public Ts GetList()
+        public virtual Ts GetList()
         {
-            throw new NotImplementedException();
+            return GetList(string.Empty);
         }
     }
 }

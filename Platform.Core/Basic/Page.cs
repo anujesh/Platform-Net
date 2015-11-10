@@ -2,17 +2,15 @@
 
 namespace Platform.Core.Basic
 {
-    public class Page : AdminModel
+    public class Page : AlonModel
     {
         public Page()
         {
             Image = new Image();
         }
 
-        public string UKey { get; set; }
-        public string UText { get; set; }
+        public string Utext { get; set; }
         public string Title { get; set; }
-        public string Name { get; set; }
         public string Descript { get; set; }
         public string Content { get; set; }
         public int ImageId { get; set; }

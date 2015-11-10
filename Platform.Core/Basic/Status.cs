@@ -1,6 +1,6 @@
-﻿namespace Platform.Core.Status
+﻿namespace Platform.Core.Basic
 {
-    public class Status : CoreModel
+    public class Status : AlonModel
     {
         public string Content { get; set; }
     }

@@ -5,35 +5,12 @@ using Platform.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Platform.Data.Settings;
 
 namespace Platform.Data
 {
 
-    public interface IDBConfig : ICoreConfigMan
-    {
-        string DataPath { get; }
-        string BackupBasePath { get; }
-        string SchemaPath { get; }
-    }
 
-    public class DBConfig : CoreConfigMan, IDBConfig
-    {
-        public string DataPath
-        {
-            get { return GetStringConfig(configSection.AppConfig, "DB_Data_Path"); }
-        }
-
-        public string BackupBasePath
-        {
-            get { return GetStringConfig(configSection.AppConfig, "DB_Backup_Path"); }
-        }
-
-        public string SchemaPath
-        {
-            get { return GetStringConfig(configSection.AppConfig, "DB_Schema_Path"); }
-        }
-
-    }
     //_config.BackupPath
 
     public class DBHandler : DBAccess

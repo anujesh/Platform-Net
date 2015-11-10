@@ -1,6 +1,6 @@
 ﻿namespace Platform.Core.Basic
 {
-    public class Image : CoreModel
+    public class Image : AlonModel
     {
         public Image()
         {

@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Platform.Core.Video
+namespace Platform.Core.Basic
 {
     //ula_mda_bas_video_master
     //Id,UpdatedAt,CreatedAt,UpdatedBy,CreatedBy,Active,Locked,Online
 
     public class Video : CoreModel
     {
-        public string Name { get; set; }
         public string Descript { get; set; }
     }
 

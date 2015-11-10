@@ -1,31 +1,16 @@
-﻿using System.Collections.Generic;
-
-namespace Platform.Core.Category
+﻿namespace Platform.Core.Basic
 {
-    public class Category : CoreModel
+    public class Category : AlonModel
     {
-        public string UKey { get; set; }
-        public string Url { get; set; }
-        public string Title { get; set; }
         public string Descript { get; set; }
     }
 
     // List
-
-    public class Categories
+    public class Categories : CoreList<Category>
     {
-        public Categories()
-        {
-            page = new Paging();
-        }
-
-        public List<Category> list { get; set; }
-        public Paging page { get; set; }
-        public Summary summ { get; set; }
     }
 
     // Response
-
     public class rpCategory : ResponseItem<Category>
     {
     }

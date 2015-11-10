@@ -4,17 +4,6 @@
     using System;
     using System.Collections.Generic;
 
-    /**
-        1. CoreModel    -> CoreRepo<T>
-        2. TrakModel    -> TrakRepo<T>
-        3. AlonModel    -> AlonRepo<T, Ts>
-        4. AdminModel   -> AdminRepo<T, Ts>
-        5. UkeyModel    -> UkeyRepo<T, Ts>     -> SimpleUkeyRepo
-        6. FixyModel    -> FixyRepo<T, Ts>
-    */
-
-
-
     public class CoreModel
     {
         public int Id { get; set; }
@@ -48,11 +37,6 @@
         public DateTime AdminedAt { get; set; }
 
         public EntryStatus Status { get; set; }
-    }
-
-    public class UkeyModelToRemove
-    {
-        public string Ukey { get; set; }
     }
 
     public class FixyModel : AdminModel

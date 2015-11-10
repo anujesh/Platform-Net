@@ -1,10 +1,9 @@
-﻿using Dapper;
-using Platform.Core;
-using Platform.Core.Enums;
-using Platform.Core.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dapper;
+using Platform.Core;
+using Platform.Core.Interface;
 
 namespace Platform.Base.Repository
 {

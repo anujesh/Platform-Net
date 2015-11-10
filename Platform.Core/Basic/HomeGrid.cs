@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Platform.Core.HomeGrid
+namespace Platform.Core.Basic
 {
-    public class HomeGrid : CoreModel
+    public class Homegrid : CoreModel
     {
-        public string GridName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public List<GridBox> Boxes { get; set; }
+        public List<HomegridBox> Boxes { get; set; }
     }
 
-    public class GridBox : CoreModel
+    public class HomegridBox : CoreModel
     {
         public int Height { get; set; }
         public int Weight { get; set; }
@@ -20,13 +19,13 @@ namespace Platform.Core.HomeGrid
 
     // List
 
-    public class HomeGrids : CoreList<HomeGrid>
+    public class HomeGrids : CoreList<Homegrid>
     {
     }
 
     // Response
 
-    public class rpHomeGrid : ResponseItem<HomeGrid>
+    public class rpHomeGrid : ResponseItem<Homegrid>
     {
     }
 

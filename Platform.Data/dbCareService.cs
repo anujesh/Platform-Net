@@ -1,21 +1,23 @@
-﻿using Dapper;
-using Platform.Base;
-using Platform.Core;
-using Platform.Core.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using Dapper;
+using Platform.Base;
+using Platform.Core.Utilities;
 
 namespace Platform.Data
 {
     public class dbCareService : DBAccess
     {
+        
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(dbCareService));
 
         private ICoreConfigMan _config;
 
-        string db_prefix = "";
+        string db_prefix = "tls_";
         int fileVersion = 0;
         List<DbVersionInfo> listDbInfos;
 
@@ -50,15 +52,15 @@ namespace Platform.Data
 
             using (var conn = GetOpenConnection())
             {
-                string sql = @"select module_name,max(version) as version_max,count(version) as version_count
-                                from " + db_prefix + "tbl_version_info group by module_name";
+                string sql = string.Format(@"select module_name,max(version) as version_max,count(version) as version_count
+                                from {0}tbl_version_info group by module_name", db_prefix);
                 listDbInfo = conn.Query<DbVersionInfo>(sql).AsList();
             }
 
             return listDbInfo;
         }
 
-        public void deploy(bool mode = true)
+        public bool deploy(bool mode = true)
         {
             fileVersion = 0;
 
@@ -72,20 +74,23 @@ namespace Platform.Data
 
                 foreach(String file in files)
                 {
-                    si.VerifyFileNameStructure(file);
+                    if (!si.VerifyFileNameStructure(file))
+                    {
+                        return false;
+                    }
                 }
 
                 foreach(String file in files)
                 {
                     int dbModuleVersion = getCurrentModuleDbVersion(folder);
-                    si.LoadScriptFile(basename(file));
+                    si.LoadScriptFile(file);
 
                     if (si.Version > dbModuleVersion)
                     {
                         try
                         {
                             si.LoadScriptFile(file);
-                            string sqlin = si.Content + ";" + String.Format(@"INSERT INTO {0}tbl_version_info 
+                            string sqlin = si.Content.Replace(@"<prefix>", db_prefix) + ";" + String.Format(@"INSERT INTO {0}tbl_version_info 
                                                     (`module_name`, `version`, descript) 
                                                     VALUES ('{1}', '{2}', '{3}');", db_prefix, si.Module, si.Version, si.Descript);
 
@@ -96,10 +101,13 @@ namespace Platform.Data
                         catch(Exception ex)
                         {
                             log.ErrorFormat("Deploy - Running SQL Scripts" , ex.Message);
+                            throw ex;
                         }
                     }
                 }
             }
+
+            return true;
         }
 
         public string basename(string fileName)
@@ -123,7 +131,11 @@ namespace Platform.Data
 
             return found;
         }
+
+
     }
+
+
 
 
     public class DbVersionInfo
@@ -135,6 +147,8 @@ namespace Platform.Data
 
     public class ScriptInfo
     {
+        private const string REGEX_FILENAME = @"(\b[A-Z]\w*\b) - (\d{6}) - (\b[ a-zA-Z0-9]{10,90}\b).mysql";
+
         public ScriptInfo()
         {
             ResetProperties();
@@ -162,16 +176,27 @@ namespace Platform.Data
 
         public bool VerifyFileNameStructure(string fileName)
         {
-            return true;
+            Regex regex = new Regex(REGEX_FILENAME);
+            Match match = regex.Match(fileName);
+
+            return match.Success;
         }
 
         public bool LoadScriptFile(string fileName)
         {
             ResetProperties();
 
+            Regex regex = new Regex(REGEX_FILENAME);
+            Match match = regex.Match(Path.GetFileName(fileName));
+
+            Module = match.Groups[1].Value;
+            Version = Int16.Parse(match.Groups[2].Value);
+            Descript = match.Groups[3].Value;
+
+
             Content = File.ReadAllText(fileName);
-            Content = Content.Replace("<db_prefix>", db_prefix);
-            Content = Content.Replace("<prefix>", db_prefix);
+            //Content = Content.Replace("<db_prefix>", db_prefix);
+            //Content = Content.Replace("<prefix>", db_prefix);
             //Content = $this->minify($content);
 
             return true;
