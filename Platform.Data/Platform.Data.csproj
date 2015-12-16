@@ -37,11 +37,16 @@
     <Reference Include="Dapper.Rainbow.MySql">
       <HintPath>..\..\packages\Dapper.Rainbow.MySql.0.7.1\lib\net45\Dapper.Rainbow.MySql.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySqlBackup, Version=2.0.9.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MySqlBackup.NET.2.0.9.2\lib\net45\MySqlBackup.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -60,16 +65,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Migrations\PLATFORM - 000001 - Basic objects Album.mysql" />
-    <None Include="Migrations\PLATFORM - 000002 - Basic objects Category.mysql" />
-    <None Include="Migrations\PLATFORM - 000003 - Basic objects Element.mysql" />
-    <None Include="Migrations\PLATFORM - 000004 - Basic objects Homegrid.mysql" />
-    <None Include="Migrations\PLATFORM - 000005 - Basic objects Image.mysql" />
-    <None Include="Migrations\PLATFORM - 000006 - Basic objects Link.mysql" />
-    <None Include="Migrations\PLATFORM - 000007 - Basic objects Page.mysql" />
-    <None Include="Migrations\PLATFORM - 000008 - Basic objects Post.mysql" />
-    <None Include="Migrations\PLATFORM - 000009 - Basic objects Status.mysql" />
-    <None Include="Migrations\PLATFORM - 000010 - Basic objects Tag.mysql" />
+    <None Include="Migrations\PLATFORM\PLATFORM - 000001 - Basic objects Album.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM\PLATFORM - 000002 - Basic objects Category.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM\PLATFORM - 000003 - Basic objects Element.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM\PLATFORM - 000004 - Basic objects Homegrid.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM\PLATFORM - 000005 - Basic objects Image.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM\PLATFORM - 000006 - Basic objects Link.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM\PLATFORM - 000007 - Basic objects Page.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM\PLATFORM - 000008 - Basic objects Post.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM\PLATFORM - 000009 - Basic objects Status.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM\PLATFORM - 000010 - Basic objects Tag.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrations\PLATFORM\PLATFORM - 000011 - AspNet Identity objects.mysql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

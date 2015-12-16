@@ -8,23 +8,26 @@ using Platform.Core.Interface;
 
 namespace Platform.Base.Controller
 {
-    public class AdminApiController<T, Ts, rpT, rpTs> : ApiController
-        where T : AdminModel
-        where Ts : CoreList<T>, new()
-        where rpT : ResponseItem<T>, new()
-        where rpTs : ResponseItem<Ts>, new()
+    public class BaseApiController<T, Ts, rpT, rpTs> : ApiController
+          where T : AdminModel
+          where Ts : CoreList<T>, new()
+          where rpT : ResponseItem<T>, new()
+          where rpTs : ResponseItem<Ts>, new()
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(T));
 
         protected IAdminRepository<T, Ts> _repo;
 
-        public AdminApiController(IAdminRepository<T, Ts> repoT)
+        public BaseApiController(IAdminRepository<T, Ts> repoT)
         {
             log.DebugFormat("Type", "");
             _repo = repoT;
         }
 
+        //[System.Web.Http.Route("listx1")]
+
         protected async Task<rpTs> List()
+        //protected rpTs List()
         {
             rpTs respo = new rpTs();
             log.Info("Action " + typeof(rpTs));
@@ -32,6 +35,7 @@ namespace Platform.Base.Controller
             try
             {
                 Ts listTs = await Task.Run<Ts>(() => _repo.GetList());
+                //Ts listTs = _repo.GetList();
                 respo.data = listTs;
             }
             catch (Exception ex)
@@ -90,7 +94,7 @@ namespace Platform.Base.Controller
         {
             T items = await Task.Run<T>(() => _repo.GetById(id));
 
-            RequestProvider reqProvider = new RequestProvider();
+            RequestProviderModel reqProvider = new RequestProviderModel();
 
             if (!ActionChecker.IsRequestedActionValid(reqProvider.UserMode, items.Status, requestedStage))
             {
@@ -100,4 +104,5 @@ namespace Platform.Base.Controller
             return 1;
         }
     }
+
 }

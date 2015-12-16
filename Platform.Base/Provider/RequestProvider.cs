@@ -3,7 +3,7 @@ using Platform.Core.Enums;
 
 namespace Platform.Base.Provider
 {
-    public class RequestProvider
+    public class RequestProviderModel
     {
         public int UserId { get; set; }
         public UserMode UserMode { get; set; }

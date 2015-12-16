@@ -12,7 +12,7 @@ namespace Platform.Core.Utilities
         //string App_Path_Root { get; }
         string DbPrefix { get; }
         string ConnectionString { get; }
-        string DbMigrationFolders { get;  }
+        string[] DbMigrationFolders { get;  }
         string DbMigrationBase { get; }
     }
 
@@ -39,9 +39,9 @@ namespace Platform.Core.Utilities
 
     abstract public class CoreConfigMan : ICoreConfigMan
     {
-        public string DbMigrationFolders
+        public string[] DbMigrationFolders
         {
-            get { return GetStringConfig(configSection.AppConfig, "DbMigrationFolders"); }
+            get { return GetPipedStringConfig(configSection.AppConfig, "DbMigrationFolders"); }
         }
 
         public string ConnectionString
@@ -91,6 +91,11 @@ namespace Platform.Core.Utilities
                 //ex.Message()
                 return string.Empty;
             }
+        }
+
+        protected string[] GetPipedStringConfig(configSection section, string configKey)
+        {
+            return GetStringConfig(section, configKey).Split('|');
         }
 
         protected bool GetBoolConfig(configSection section, string configKey)

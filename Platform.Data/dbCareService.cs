@@ -11,8 +11,6 @@ namespace Platform.Data
 {
     public class dbCareService : DBAccess
     {
-        
-
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(dbCareService));
 
         private ICoreConfigMan _config;
@@ -27,8 +25,6 @@ namespace Platform.Data
         )
         {
             _config = config;
-
-            
 
             string sql = String.Format(@"CREATE TABLE IF NOT EXISTS {0}tbl_version_info
                             (id bigint(20) NOT NULL AUTO_INCREMENT, 
@@ -64,15 +60,15 @@ namespace Platform.Data
         {
             fileVersion = 0;
 
-            String[] folders = _config.DbMigrationFolders.Split('|'); // "BASIC|PLATFORM|CUSTOM|APPLICATION".Split('|');
+            string[] folders = _config.DbMigrationFolders; // "BASIC|PLATFORM|CUSTOM|APPLICATION".Split('|');
 
-            foreach(String folder in folders)
+            foreach(string folder in folders)
             {
-                String[] files = Directory.GetFiles(_config.DbMigrationBase + folder);
+                string[] files = Directory.GetFiles(string.Format(_config.DbMigrationBase,folder));
 
                 ScriptInfo si = new ScriptInfo();
 
-                foreach(String file in files)
+                foreach(string file in files)
                 {
                     if (!si.VerifyFileNameStructure(file))
                     {
@@ -80,7 +76,7 @@ namespace Platform.Data
                     }
                 }
 
-                foreach(String file in files)
+                foreach(string file in files)
                 {
                     int dbModuleVersion = getCurrentModuleDbVersion(folder);
                     si.LoadScriptFile(file);
@@ -90,15 +86,13 @@ namespace Platform.Data
                         try
                         {
                             si.LoadScriptFile(file);
-                            string sqlin = si.Content.Replace(@"<prefix>", db_prefix) + ";" + String.Format(@"INSERT INTO {0}tbl_version_info 
+                            string sqlin = si.Content.Replace(@"<prefix>", db_prefix) + "" + String.Format(@"INSERT INTO {0}tbl_version_info 
                                                     (`module_name`, `version`, descript) 
                                                     VALUES ('{1}', '{2}', '{3}');", db_prefix, si.Module, si.Version, si.Descript);
 
-                            using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(sqlin))
-                            {
-                            }
+                            ExecuteSQL(sqlin);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             log.ErrorFormat("Deploy - Running SQL Scripts" , ex.Message);
                             throw ex;
@@ -108,6 +102,13 @@ namespace Platform.Data
             }
 
             return true;
+        }
+
+        public void ExecuteSQL(string sqlin)
+        {
+            using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(sqlin))
+            {
+            }
         }
 
         public string basename(string fileName)
