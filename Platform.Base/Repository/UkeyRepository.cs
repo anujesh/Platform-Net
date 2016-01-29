@@ -34,7 +34,7 @@ namespace Platform.Base.Repository
                 return new T();
             }
 
-            IEnumerable<T> lists = GetItems();
+            IEnumerable<T> lists = GetItems(string.Format("ukey = '{0}'", ukey));
 
             item = lists.Where(x => x.Ukey == ukey).FirstOrDefault();
             if (item == null)
@@ -54,5 +54,7 @@ namespace Platform.Base.Repository
         {
             return lists;
         }
+
+
     }
 }

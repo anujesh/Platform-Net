@@ -158,9 +158,18 @@ namespace Platform.Base.Repository
                 lists = multi.Read<T>().AsList();
             }
 
-            return lists; // DecorateAll(lists);
+            return lists;// DecorateAll(lists);
         }
 
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> GetAllDeleted()
+        {
+            throw new NotImplementedException();
+        }
         //public virtual List<T> GetItems(string onWhere = "")
         //{
         //    List<T> list = new List<T>();

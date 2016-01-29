@@ -49,9 +49,11 @@
         public CoreList()
         {
             page = new Paging();
+            list = new List<T>();
+            summ = new Summary();
         }
 
-        public IEnumerable<T> list { get; set; }
+        public List<T> list { get; set; }
 
         public Paging page { get; set; }
 

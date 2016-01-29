@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Controller\BaseApiController.cs" />
     <Compile Include="BaseRepository.cs" />
