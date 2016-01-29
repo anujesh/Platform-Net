@@ -1,0 +1,8 @@
+Platform.Base/bin/
+Platform.Base/obj/
+Platform.Core/bin/
+Platform.Core/obj/
+Platform.Data/bin/
+Platform.Data/obj/
+Platform.Test/bin/
+Platform.Test/obj/

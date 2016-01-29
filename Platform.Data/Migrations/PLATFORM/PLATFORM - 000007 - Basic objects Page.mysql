@@ -1,0 +1,46 @@
+
+-- CoreModel
+CREATE TABLE IF NOT EXISTS `<prefix>web_bas_page_master` (
+  `Id`          BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `Name`        VARCHAR(30) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-- UkeyModel
+ALTER TABLE `<prefix>web_bas_page_master`
+ADD COLUMN `Ukey`          VARCHAR(12) NULL DEFAULT NULL ,
+ADD COLUMN `UpdatedBy`     BIGINT(20)  NULL DEFAULT 0 ,
+ADD COLUMN `UpdatedAt`     DATETIME NULL DEFAULT NULL ;
+
+
+-- AlonModel
+ALTER TABLE `<prefix>web_bas_page_master`
+ADD COLUMN `Locked`        TINYINT(4) NULL DEFAULT 0 ,
+ADD COLUMN `Active`        TINYINT(4) NULL DEFAULT 1 ,
+ADD COLUMN `Online`        TINYINT(4) NULL DEFAULT 0 ;
+
+
+-- AdminModel
+/*
+ALTER TABLE `<prefix>web_bas_page_master`
+ADD COLUMN `AdminedBy`     BIGINT(20)  NULL DEFAULT 0,
+ADD COLUMN `AdminedAt`     DATETIME NULL DEFAULT NULL,
+ADD COLUMN `Status`        TINYINT(4) NULL DEFAULT 0 ;
+
+
+-- FixyModel
+--ALTER TABLE `<prefix>web_bas_page_master`
+--ADD COLUMN `FixId`         BIGINT(20)  NULL DEFAULT 0 ;
+*/
+
+
+ALTER TABLE `<prefix>web_bas_page_master`
+ADD COLUMN  `Utext`    VARCHAR(100)  NULL DEFAULT '',
+ADD COLUMN  `Title`    VARCHAR(100)  NULL DEFAULT '',
+ADD COLUMN  `Descript`    VARCHAR(100)  NULL DEFAULT '',
+ADD COLUMN  `Content`    TEXT  NULL ,
+ADD COLUMN  `ImageId`    BIGINT(20)  NULL DEFAULT 0
+;
+
+
