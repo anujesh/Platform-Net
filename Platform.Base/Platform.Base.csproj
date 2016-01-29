@@ -74,7 +74,6 @@
     <Compile Include="Attributes\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Controller\BaseApiController.cs" />
-    <Compile Include="BaseRepository.cs" />
     <Compile Include="DBAccess.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="PageRepository.cs" />
@@ -85,7 +84,6 @@
     <Compile Include="Repository\CoreRepository.cs" />
     <Compile Include="Repository\FixyRepository.cs" />
     <Compile Include="Repository\UkeyRepository.cs" />
-    <Compile Include="SimpleRepository.cs" />
     <Compile Include="Support\BaseConfigMan.cs" />
   </ItemGroup>
   <ItemGroup>

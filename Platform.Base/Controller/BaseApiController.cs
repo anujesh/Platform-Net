@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Web.Http;
-using Platform.Base.Provider;
+﻿using Platform.Base.Provider;
 using Platform.Core;
 using Platform.Core.Enums;
 using Platform.Core.Interface;
+using System;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace Platform.Base.Controller
 {
@@ -24,10 +24,7 @@ namespace Platform.Base.Controller
             _repo = repoT;
         }
 
-        //[System.Web.Http.Route("listx1")]
-
         protected async Task<rpTs> List()
-        //protected rpTs List()
         {
             rpTs respo = new rpTs();
             log.Info("Action " + typeof(rpTs));
@@ -35,7 +32,6 @@ namespace Platform.Base.Controller
             try
             {
                 Ts listTs = await Task.Run<Ts>(() => _repo.GetList());
-                //Ts listTs = _repo.GetList();
                 respo.data = listTs;
             }
             catch (Exception ex)
@@ -55,7 +51,6 @@ namespace Platform.Base.Controller
 
             try
             {
-                //repoT repo = new repoT();
                 T items = await Task.Run<T>(() => _repo.GetById(id));
                 respo.data = items;
             }
@@ -76,7 +71,6 @@ namespace Platform.Base.Controller
 
             try
             {
-                //repoT repo = new repoT();
                 T item = await Task.Run<T>(() => _repo.GetByUKey(uKey));
                 respo.data = item;
             }

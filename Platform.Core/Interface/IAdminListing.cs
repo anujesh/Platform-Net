@@ -2,7 +2,7 @@
 
 namespace Platform.Core.Interface
 {
-    public interface AdminListing<T>
+    public interface IAdminListing<T>
     {
         List<T> GetSubmittedList();
 

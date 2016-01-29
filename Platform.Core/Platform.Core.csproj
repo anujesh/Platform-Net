@@ -54,6 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\ElementType.cs" />
+    <Compile Include="Interface\IAdminRepository.cs" />
+    <Compile Include="Interface\IAlonRepository.cs" />
+    <Compile Include="Interface\ICoreRepository.cs" />
+    <Compile Include="Interface\IFixyRepository.cs" />
+    <Compile Include="Interface\IUkeyRepository.cs" />
     <Compile Include="Layout\AdminLayout.cs" />
     <Compile Include="Basic\Album.cs" />
     <Compile Include="Layout\AppLayout.cs" />
@@ -73,10 +78,8 @@
     <Compile Include="Enums\Extensions.cs" />
     <Compile Include="Enums\FilterOperator.cs" />
     <Compile Include="Enums\UserMode.cs" />
-    <Compile Include="Interface\AdminListing.cs" />
-    <Compile Include="Interface\ICommonRepo.cs" />
+    <Compile Include="Interface\IAdminListing.cs" />
     <Compile Include="Interface\ISystemListing.cs" />
-    <Compile Include="Interface\IUkeyServ.cs" />
     <Compile Include="Interface\IUserListing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Basic\Status.cs" />

@@ -54,7 +54,5 @@ namespace Platform.Base.Repository
         {
             return lists;
         }
-
-
     }
 }

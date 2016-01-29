@@ -8,6 +8,6 @@
         Link = 4,
         Page = 5,
         Post = 6,
-        Video = 7
+        Video = 7,
     }
 }

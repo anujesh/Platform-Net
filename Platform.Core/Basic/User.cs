@@ -7,16 +7,11 @@ namespace Platform.Core.Basic
 
     public enum CoreGender
     {
-        Male = 1,
         Female = 0,
+        Male = 1,
     }
 
-    public interface IUser
-    {
-
-    }
-
-    public class User : IUser
+    public class User
     {
         public string Email { get; set; }
         public string UserName { get; set; }

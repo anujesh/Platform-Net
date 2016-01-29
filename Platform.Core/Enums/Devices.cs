@@ -1,6 +1,6 @@
 ﻿namespace Platform.Core.Enums
 {
-    public enum Devices
+    public enum CoreDevices
     {
         Unknown = 0,
         Mobile = 1,

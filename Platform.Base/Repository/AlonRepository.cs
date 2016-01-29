@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Platform.Base.Repository
 {
-    //public interface IAlonRepository<T, Ts> : IUkeyRepository<T> where T : AlonModel where Ts : CoreList<AlonModel>, new()
     public class AlonRepository<T, Ts> : UkeyRepository<T, Ts>, IAlonRepository<T, Ts> where Ts : CoreList<T>, new() where T : AlonModel, new()
     {
 

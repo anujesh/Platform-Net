@@ -7,7 +7,7 @@ namespace Platform.Core.Request
     {
         public int UserId { get; set; }
 
-        public Devices Device { get; set; }
+        public CoreDevices Device { get; set; }
 
         public DateTime TimeStamp { get; set; }
 
