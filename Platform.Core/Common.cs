@@ -4,14 +4,14 @@
     using System;
     using System.Collections.Generic;
 
-    public class CoreModel
+    abstract public class CoreModel
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
     }
 
-    public class UkeyModel : CoreModel
+    abstract public class UkeyModel : CoreModel
     {
         public string Ukey { get; set; }
 
@@ -20,7 +20,7 @@
         public DateTime UpdatedAt { get; set; }
     }
 
-    public class AlonModel : UkeyModel
+    abstract public class AlonModel : UkeyModel
     {
         public bool Active { get; set; }
 
@@ -29,8 +29,7 @@
         public bool Online { get; set; }
     }
 
-
-    public class AdminModel : AlonModel
+    abstract public class AdminModel : AlonModel
     {
         public int AdminedBy { get; set; }
 
@@ -39,12 +38,12 @@
         public EntryStatus Status { get; set; }
     }
 
-    public class FixyModel : AdminModel
+    abstract public class FixyModel : AdminModel
     {
         public int FixId { get; set; }
     }
 
-    public class CoreList<T>
+    abstract public class CoreList<T>
     {
         public CoreList()
         {
