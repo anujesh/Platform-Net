@@ -4,6 +4,11 @@
     {
         private RequestInfo requestInfo;
 
+        public RequestProvider()
+        {
+            requestInfo = new RequestInfo();
+        }
+
         public RequestInfo GetRequestInfo()
         {
             return requestInfo;
