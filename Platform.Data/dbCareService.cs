@@ -9,22 +9,23 @@ using Platform.Core.Utilities;
 
 namespace Platform.Data
 {
-    public class dbCareService : DBAccess
+    public class DbCareService : DBAccess
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(dbCareService));
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(DbCareService));
 
         private ICoreConfigMan _config;
 
-        string db_prefix = "tls_";
+        string db_prefix;
         int fileVersion = 0;
         List<DbVersionInfo> listDbInfos;
 
-        public dbCareService
+        public DbCareService
         (
             ICoreConfigMan config
         )
         {
             _config = config;
+            db_prefix = _config.DbPrefix;
 
             string sql = String.Format(@"CREATE TABLE IF NOT EXISTS {0}tbl_version_info
                             (id bigint(20) NOT NULL AUTO_INCREMENT, 
