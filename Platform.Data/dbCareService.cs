@@ -61,7 +61,7 @@ namespace Platform.Data
         {
             fileVersion = 0;
 
-            string[] folders = _config.DbMigrationFolders; // "BASIC|PLATFORM|CUSTOM|APPLICATION".Split('|');
+            string[] folders = _config.DbMigrationFolders;
 
             foreach(string folder in folders)
             {
@@ -77,7 +77,9 @@ namespace Platform.Data
                     }
                 }
 
-                foreach(string file in files)
+                string sqlin = string.Empty;
+
+                foreach (string file in files)
                 {
                     int dbModuleVersion = getCurrentModuleDbVersion(folder);
                     si.LoadScriptFile(file);
@@ -87,7 +89,7 @@ namespace Platform.Data
                         try
                         {
                             si.LoadScriptFile(file);
-                            string sqlin = si.Content.Replace(@"<prefix>", db_prefix) + "" + String.Format(@"INSERT INTO {0}tbl_version_info 
+                            sqlin = si.Content.Replace(@"<prefix>", db_prefix) + "" + String.Format(@"INSERT INTO {0}tbl_version_info 
                                                     (`module_name`, `version`, descript) 
                                                     VALUES ('{1}', '{2}', '{3}');", db_prefix, si.Module, si.Version, si.Descript);
 
@@ -95,7 +97,7 @@ namespace Platform.Data
                         }
                         catch (Exception ex)
                         {
-                            log.ErrorFormat("Deploy - Running SQL Scripts" , ex.Message);
+                            log.ErrorFormat("Deploy - Running SQL > " + sqlin, ex.Message);
                             throw ex;
                         }
                     }
