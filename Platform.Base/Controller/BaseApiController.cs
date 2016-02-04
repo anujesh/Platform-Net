@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace Platform.Base.Controller
 {
-    public class BaseApiController<T, Ts, rpT, rpTs> : ApiController
+    public class BaseAdminApiController<T, Ts, rpT, rpTs> : ApiController
           where T : AdminModel
           where Ts : CoreList<T>, new()
           where rpT : ResponseItem<T>, new()
@@ -16,9 +16,9 @@ namespace Platform.Base.Controller
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(T));
 
-        protected IAdminRepository<T, Ts> _repo;
+        protected readonly IAdminRepository<T, Ts> _repo;
 
-        public BaseApiController(IAdminRepository<T, Ts> repoT)
+        public BaseAdminApiController(IAdminRepository<T, Ts> repoT)
         {
             log.DebugFormat("Type", "");
             _repo = repoT;
