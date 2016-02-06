@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Platform.Core;
 using Platform.Core.Interface;
+using Dapper;
 
 namespace Platform.Base.Repository
 {
-    public class UkeyRepository<T, Ts> : CoreRepository<T>, IUkeyRepository<T> where Ts : CoreList<T> where T : UkeyModel, new()
+    abstract public class UkeyRepository<T, Ts> : CoreRepository<T>, IUkeyRepository<T> 
+        where Ts : CoreList<T>, new()
+        where T : UkeyModel, new()
     {
         //public T Find(string ukey)
         //{
@@ -24,6 +27,35 @@ namespace Platform.Base.Repository
         //    return output;
         //    //return DecorateOne(output);
         //}
+
+        public virtual Ts GetList()
+        {
+            return GetList(string.Empty);
+        }
+
+        public virtual Ts GetList(string onWhere = "")
+        {
+            Ts lists = new Ts();
+
+            if (!string.IsNullOrEmpty(onWhere))
+            {
+                onWhere = " AND " + onWhere;
+            }
+
+            string sql = string.Format(
+                    @"
+                    SELECT COUNT(*) as Total FROM {0} WHERE 1=1 {1};
+                    SELECT * FROM {0} WHERE 1=1 {1} LIMIT 0, 30"
+                    , tableName, onWhere);
+
+            using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(sql))
+            {
+                lists.summ = multi.Read<Summary>().Single();
+                lists.list = multi.Read<T>().AsList();
+            }
+
+            return DecorateAll(lists);
+        }
 
         public virtual T GetByUKey(string ukey)
         {

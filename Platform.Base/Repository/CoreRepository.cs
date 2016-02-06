@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Platform.Base.Repository
 {
-    public class CoreRepository<T> : DBAccess, ICoreRepository<T>
+    abstract public class CoreRepository<T> : DBAccess, ICoreRepository<T>
         where T : CoreModel
     {
         public string tableName = "~";
@@ -127,12 +127,12 @@ namespace Platform.Base.Repository
         {
             using (var conn = GetOpenConnection())
             {
-                var sqlQuery = string.Format("Delete From {0} Where EmpID = {1}", tableName, id);
+                var sqlQuery = string.Format("Delete From {0} Where ID = {1}", tableName, id);
                 conn.Execute(sqlQuery);
             }
         }
 
-  
+
 
 
 
@@ -145,14 +145,11 @@ namespace Platform.Base.Repository
         {
             IEnumerable<T> lists = null;// = new IList<T>();
 
-            if (!string.IsNullOrEmpty(onWhere))
-            {
-                onWhere = " AND " + onWhere;
-            }
+            onWhere = (!string.IsNullOrEmpty(onWhere)) ? string.Empty : " WHERE " + onWhere;
 
             using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(string.Format(
                     @"
-                    SELECT * FROM {0} WHERE 1=1 {1} LIMIT 0, 3"
+                    SELECT * FROM {0} {1} LIMIT 0, 3"
                     , tableName, onWhere)))
             {
                 lists = multi.Read<T>().AsList();

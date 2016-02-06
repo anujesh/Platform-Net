@@ -3,5 +3,7 @@
     public interface IUkeyRepository<T> : ICoreRepository<T> where T : UkeyModel
     {
         T GetByUKey(string ukey);
+
+        //Ts GetList(string onWhere = "");
     }
 }
