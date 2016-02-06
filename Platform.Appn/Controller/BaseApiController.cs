@@ -44,45 +44,8 @@ namespace Platform.Base.Controller
             return respo;
         }
 
-        protected async Task<rpT> FindById(int id)
-        {
-            rpT respo = new rpT();
-            log.Info("Action " + typeof(rpT));
 
-            try
-            {
-                T items = await Task.Run<T>(() => _repo.GetById(id));
-                respo.data = items;
-            }
-            catch (Exception ex)
-            {
-                respo.error = 1;
-                respo.status = "Error";
-                log.ErrorFormat("Pages", ex);
-            }
 
-            return respo;
-        }
-
-        protected async Task<rpT> FindByUkey(string uKey)
-        {
-            rpT respo = new rpT();
-            log.Info("Action " + typeof(rpT));
-
-            try
-            {
-                T item = await Task.Run<T>(() => _repo.GetByUKey(uKey));
-                respo.data = item;
-            }
-            catch (Exception ex)
-            {
-                respo.error = 1;
-                respo.status = "Error";
-                log.ErrorFormat("Pages", ex);
-            }
-
-            return respo;
-        }
 
         protected async Task<int> ActionMove(int id, EntryStatus requestedStage)
         {

@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Platform.Core;
+using Platform.Core.Interface;
 
 namespace Platform.Appn.Controller
 {
-    public class AlonApiController : UKeyApiController
+    abstract public class AlonApiController<T, Ts, rpT, rpTs> : UkeyApiController<T, Ts, rpT, rpTs>
+        where T : AlonModel
+        where Ts : CoreList<T>, new()
+        where rpT : ResponseItem<T>, new()
+        where rpTs : ResponseItem<Ts>, new()
+
     {
         protected readonly IAlonRepository<T, Ts> _repo;
 
-        public AlonApiController()
+        public AlonApiController(IAlonRepository<T, Ts> repo) : base(repo)
         {
-
+            _repo = repo;
         }
     }
 }
