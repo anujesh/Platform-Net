@@ -33,6 +33,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -61,13 +65,24 @@
   <ItemGroup>
     <Compile Include="Controller\AdminApiController.cs" />
     <Compile Include="Controller\AlonApiController.cs" />
+    <Compile Include="Controller\BaseApiController.cs" />
     <Compile Include="Controller\CoreApiController.cs" />
     <Compile Include="Controller\FixyApiController.cs" />
-    <Compile Include="Controller\UKeyApiController.cs" />
+    <Compile Include="Controller\UkeyApiController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Platform.Base\Platform.Base.csproj">
+      <Project>{e137e48b-34bd-48f2-a8d2-da5a3aa820bc}</Project>
+      <Name>Platform.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Platform.Core\Platform.Core.csproj">
+      <Project>{e1fd4bae-baba-44bd-9fdf-aaceb9b3217c}</Project>
+      <Name>Platform.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
