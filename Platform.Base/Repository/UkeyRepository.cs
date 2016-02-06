@@ -11,22 +11,6 @@ namespace Platform.Base.Repository
         where Ts : CoreList<T>, new()
         where T : UkeyModel, new()
     {
-        //public T Find(string ukey)
-        //{
-        //    T output = null;
-        //    using (var conn = GetOpenConnection())
-        //    {
-        //        string query = string.Format(@"SELECT {2} FROM {0} WHERE Ukey = '{1}'", tableName, ukey, fieldList);
-        //        if (conn.Query<T>(query).Count() > 0)
-        //        {
-        //            output = conn.Query<T>(query).SingleOrDefault();
-        //            output = FindItem(output);
-        //        }
-        //    }
-
-        //    return output;
-        //    //return DecorateOne(output);
-        //}
 
         public virtual Ts GetList()
         {
