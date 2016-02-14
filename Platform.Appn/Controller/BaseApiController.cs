@@ -47,19 +47,19 @@ namespace Platform.Base.Controller
 
 
 
-        protected async Task<int> ActionMove(int id, EntryStatus requestedStage)
-        {
-            T items = await Task.Run<T>(() => _repo.GetById(id));
+        //protected async Task<int> ActionMove(int id, EntryStatus requestedStage)
+        //{
+        //    T items = await Task.Run<T>(() => _repo.GetById(id));
 
-            RequestProviderModel reqProvider = new RequestProviderModel();
+        //    RequestProviderModel reqProvider = new RequestProviderModel();
 
-            if (!ActionChecker.IsRequestedActionValid(reqProvider.UserMode, items.Status, requestedStage))
-            {
-                //throw "Not allowed";
-            }
+        //    if (!ActionChecker.IsRequestedActionValid(reqProvider.UserMode, items.Status, requestedStage))
+        //    {
+        //        //throw "Not allowed";
+        //    }
 
-            return 1;
-        }
+        //    return 1;
+        //}
     }
 
 }

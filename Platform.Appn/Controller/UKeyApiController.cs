@@ -1,6 +1,7 @@
 ﻿using Platform.Core;
 using Platform.Core.Interface;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Platform.Appn.Controller
@@ -12,9 +13,9 @@ namespace Platform.Appn.Controller
         where rpTs : ResponseItem<Ts>, new()
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(T));
-        protected readonly IUkeyRepository<T> _repo;
+        protected readonly IUkeyRepository<T, Ts> _repo;
 
-        public UkeyApiController(IUkeyRepository<T> repo) : base(repo)
+        public UkeyApiController(IUkeyRepository<T, Ts> repo) : base(repo)
         {
             _repo = repo;
         }
@@ -46,8 +47,8 @@ namespace Platform.Appn.Controller
 
             try
             {
-                //T item = await Task.Run<T>(() => _repoTs GetList(string onWhere = "")GetByUKey(uKey));
-                //respo.data = item;
+                Ts item = await Task.Run<Ts>(() => _repo.GetList()); // GetByUKey(uKey));
+                respo.data = item;
             }
             catch (Exception ex)
             {

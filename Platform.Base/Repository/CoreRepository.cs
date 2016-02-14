@@ -145,7 +145,7 @@ namespace Platform.Base.Repository
         {
             IEnumerable<T> lists = null;// = new IList<T>();
 
-            onWhere = (!string.IsNullOrEmpty(onWhere)) ? string.Empty : " WHERE " + onWhere;
+            onWhere = (string.IsNullOrEmpty(onWhere)) ? string.Empty : " WHERE " + onWhere;
 
             using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(string.Format(
                     @"

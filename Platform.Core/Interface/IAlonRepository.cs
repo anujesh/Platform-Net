@@ -2,7 +2,7 @@
 
 namespace Platform.Core.Interface
 {
-    public interface IAlonRepository<T, Ts> : IUkeyRepository<T> where T : AlonModel where Ts : CoreList<T>
+    public interface IAlonRepository<T, Ts> : IUkeyRepository<T, Ts> where T : AlonModel where Ts : CoreList<T>, new()
     {
         bool Lock(int id);
 
