@@ -103,7 +103,7 @@ namespace Platform.Base.Repository
                             ({1}) 
                             VALUES
                             ({2});
-                        SELECT CAST(SCOPE_IDENTITY() as int)", tableName, fieldList, getInsertValues());
+                        SELECT LAST_INSERT_ID();", tableName, fieldList, getInsertValues());
                 var pageId = conn.Query<int>(sqlQuery, page).Single();
                 //page.@PrimaryId = pageId;
             }
@@ -132,7 +132,10 @@ namespace Platform.Base.Repository
             }
         }
 
-
+        public T Save(T model)
+        {
+            return Add(model);
+        }
 
 
 

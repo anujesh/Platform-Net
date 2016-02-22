@@ -9,5 +9,7 @@ namespace Platform.Core.Interface
         T GetByName(string name);
 
         IEnumerable<T> GetItems(string where = "");
+
+        T Save(T model);
     }
 }

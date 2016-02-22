@@ -40,5 +40,25 @@ namespace Platform.Appn.Controller
 
             return respo;
         }
+
+        protected async Task<rpT> SaveByModel(T model)
+        {
+            rpT respo = new rpT();
+            log.Info("Action " + typeof(rpT));
+
+            try
+            {
+                T items = await Task.Run<T>(() => _repo.Save(model));
+                respo.data = items;
+            }
+            catch (Exception ex)
+            {
+                respo.error = 1;
+                respo.status = "Error";
+                log.ErrorFormat("Pages", ex);
+            }
+
+            return respo;
+        }
     }
 }
