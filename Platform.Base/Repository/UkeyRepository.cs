@@ -7,10 +7,11 @@ using Dapper;
 
 namespace Platform.Base.Repository
 {
-    abstract public class UkeyRepository<T, Ts> : CoreRepository<T>, IUkeyRepository<T, Ts> 
+    public class UkeyRepository<T, Ts> : CoreRepository<T>, IUkeyRepository<T, Ts> 
         where Ts : CoreList<T>, new()
         where T : UkeyModel, new()
     {
+        public UkeyRepository() { }
 
         public virtual Ts GetList()
         {
