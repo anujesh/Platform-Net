@@ -37,10 +37,10 @@ namespace Platform.Base.Repository
 
 
 
-        protected virtual T DecorateOne(T item)
-        {
-            return item;
-        }
+        //protected virtual T DecorateOne(T item)
+        //{
+        //    return item;
+        //}
 
 
 

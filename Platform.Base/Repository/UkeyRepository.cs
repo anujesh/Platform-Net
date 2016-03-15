@@ -11,7 +11,7 @@ namespace Platform.Base.Repository
         where Ts : CoreList<T>, new()
         where T : UkeyModel, new()
     {
-        public UkeyRepository() { }
+        public UkeyRepository() : base() { }
 
         public virtual Ts GetList()
         {
@@ -59,6 +59,11 @@ namespace Platform.Base.Repository
                 item = new T();
             }
 
+            return DecorateOne(item);
+        }
+
+        protected virtual T DecorateOne(T item)
+        {
             return item;
         }
 

@@ -7,9 +7,11 @@ using System.Linq;
 
 namespace Platform.Base.Repository
 {
-    abstract public class CoreRepository<T> : DBAccess, ICoreRepository<T>
+    public class CoreRepository<T> : DBAccess, ICoreRepository<T>
         where T : CoreModel
     {
+        public CoreRepository() { }
+
         public string tableName = "~";
         protected string fieldList = "*";
         protected string primaryKey = "~";
