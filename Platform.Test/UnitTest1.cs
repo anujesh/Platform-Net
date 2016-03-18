@@ -2,6 +2,10 @@
 using Platform.Data;
 using Platform.Data.Settings;
 using MySql;
+using Platform.Core.Interface;
+using Platform.Base.Repository;
+using Booolean.Core.Models;
+using Booolean.Base.Repository;
 
 namespace Platform.Test
 {
@@ -22,6 +26,14 @@ namespace Platform.Test
 
             dbCareServ = new DbCareService(_config);
             dbCareServ.deploy();
+        }
+
+        [TestMethod]
+        public void TestMethod1u()
+        {
+           // ICoreRepository<Stage> repoStage = new StageRepository();
+           // Assert.AreEqual(repoStage.Table, "~");
+
         }
     }
 }

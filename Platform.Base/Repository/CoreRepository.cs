@@ -10,12 +10,19 @@ namespace Platform.Base.Repository
     public class CoreRepository<T> : DBAccess, ICoreRepository<T>
         where T : CoreModel
     {
-        public CoreRepository() { }
+        public CoreRepository() : base() { }
 
         public string tableName = "~";
         protected string fieldList = "*";
         protected string primaryKey = "~";
 
+        public string Table
+        {
+            get
+            {
+                return tableName;
+            }
+        }
         public string GetFieldList()
         {
             string ss = "";
