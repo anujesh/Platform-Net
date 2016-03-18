@@ -81,14 +81,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Gannet\Gannet.Base\Gannet.Base.csproj">
-      <Project>{63ce599d-814e-4ea3-afef-1c828a2266a7}</Project>
-      <Name>Gannet.Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Gannet\Gannet.Core\Gannet.Core.csproj">
-      <Project>{3671158e-9dee-47de-b173-40eaa516f1c6}</Project>
-      <Name>Gannet.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Platform.Base\Platform.Base.csproj">
       <Project>{E137E48B-34BD-48F2-A8D2-DA5A3AA820BC}</Project>
       <Name>Platform.Base</Name>
