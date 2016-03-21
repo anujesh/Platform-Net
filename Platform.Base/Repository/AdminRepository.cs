@@ -5,7 +5,7 @@ using System;
 
 namespace Platform.Base.Repository
 {
-    public class AdminRepository<T, Ts> : AlonRepository<T, Ts>, IAdminRepository<T, Ts> where Ts : CoreList<T>, new() where T : AdminModel, new()
+    abstract public class AdminRepository<T, Ts> : AlonRepository<T, Ts>, IAdminRepository<T, Ts> where Ts : CoreList<T>, new() where T : AdminModel, new()
     {
         public Ts GetSubmittedList()
         {

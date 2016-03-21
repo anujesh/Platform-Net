@@ -9,22 +9,23 @@ using Platform.Core.Utilities;
 
 namespace Platform.Data
 {
-    public class dbCareService : DBAccess
+    public class DbCareService : DBAccess
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(dbCareService));
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(DbCareService));
 
         private ICoreConfigMan _config;
 
-        string db_prefix = "tls_";
+        string db_prefix;
         int fileVersion = 0;
         List<DbVersionInfo> listDbInfos;
 
-        public dbCareService
+        public DbCareService
         (
             ICoreConfigMan config
         )
         {
             _config = config;
+            db_prefix = _config.DbPrefix;
 
             string sql = String.Format(@"CREATE TABLE IF NOT EXISTS {0}tbl_version_info
                             (id bigint(20) NOT NULL AUTO_INCREMENT, 
@@ -60,7 +61,7 @@ namespace Platform.Data
         {
             fileVersion = 0;
 
-            string[] folders = _config.DbMigrationFolders; // "BASIC|PLATFORM|CUSTOM|APPLICATION".Split('|');
+            string[] folders = _config.DbMigrationFolders;
 
             foreach(string folder in folders)
             {
@@ -76,7 +77,9 @@ namespace Platform.Data
                     }
                 }
 
-                foreach(string file in files)
+                string sqlin = string.Empty;
+
+                foreach (string file in files)
                 {
                     int dbModuleVersion = getCurrentModuleDbVersion(folder);
                     si.LoadScriptFile(file);
@@ -86,7 +89,7 @@ namespace Platform.Data
                         try
                         {
                             si.LoadScriptFile(file);
-                            string sqlin = si.Content.Replace(@"<prefix>", db_prefix) + "" + String.Format(@"INSERT INTO {0}tbl_version_info 
+                            sqlin = si.Content.Replace(@"<prefix>", db_prefix) + "" + String.Format(@"INSERT INTO {0}tbl_version_info 
                                                     (`module_name`, `version`, descript) 
                                                     VALUES ('{1}', '{2}', '{3}');", db_prefix, si.Module, si.Version, si.Descript);
 
@@ -94,7 +97,7 @@ namespace Platform.Data
                         }
                         catch (Exception ex)
                         {
-                            log.ErrorFormat("Deploy - Running SQL Scripts" , ex.Message);
+                            log.ErrorFormat("Deploy - Running SQL > " + sqlin, ex.Message);
                             throw ex;
                         }
                     }

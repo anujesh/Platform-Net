@@ -8,7 +8,7 @@ namespace Platform.Test
     [TestClass]
     public class UnitTest1
     {
-        private dbCareService dbCareServ;
+        private DbCareService dbCareServ;
         private DBConfig _config = new DBConfig();
 
         // integration test
@@ -20,7 +20,7 @@ namespace Platform.Test
             testDbAccess.ExecuteSQL("CREATE DATABASE `test-builder`;");
             testDbAccess.ExecuteSQL("USE `test-builder`;");
 
-            dbCareServ = new dbCareService(_config);
+            dbCareServ = new DbCareService(_config);
             dbCareServ.deploy();
         }
     }
