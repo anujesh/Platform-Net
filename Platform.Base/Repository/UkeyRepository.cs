@@ -44,7 +44,7 @@ namespace Platform.Base.Repository
 
         public virtual T GetByUKey(string ukey)
         {
-            T item; // = new T();
+            T item;
 
             if (ukey == "")
             {
