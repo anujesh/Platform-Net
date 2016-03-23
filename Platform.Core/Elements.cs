@@ -85,11 +85,12 @@
             IsView = false;
             IsDelete = false;
             IsCreate = false;
+            IsClone = false;
         }
         public bool IsEdit { get; set; }
         public bool IsView { get; set; }
         public bool IsDelete { get; set; }
         public bool IsCreate { get; set; }
+        public bool IsClone { get; set; }
     }
-
 }
