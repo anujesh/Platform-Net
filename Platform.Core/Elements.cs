@@ -6,6 +6,7 @@
         {
             error = 0;
             status = "OK";
+            able = new Able();
         }
 
         public T data { get; set; }
@@ -67,7 +68,6 @@
         public int total { get; set; }
     }
 
-
     public class DOB
     {
         public int Day { get; set; }
@@ -87,10 +87,15 @@
             IsCreate = false;
             IsClone = false;
         }
+
         public bool IsEdit { get; set; }
+
         public bool IsView { get; set; }
+
         public bool IsDelete { get; set; }
+
         public bool IsCreate { get; set; }
+
         public bool IsClone { get; set; }
     }
 }
