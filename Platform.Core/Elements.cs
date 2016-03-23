@@ -13,6 +13,8 @@
         public int error { get; set; }
 
         public string status { get; set; }
+
+        public Able able { get; set; }
     }
 
     public class ResponseList<Ts>
@@ -73,6 +75,21 @@
         public int Month { get; set; }
 
         public int Year { get; set; }
+    }
+
+    public class Able
+    {
+        public Able()
+        {
+            IsEdit = false;
+            IsView = false;
+            IsDelete = false;
+            IsCreate = false;
+        }
+        public bool IsEdit { get; set; }
+        public bool IsView { get; set; }
+        public bool IsDelete { get; set; }
+        public bool IsCreate { get; set; }
     }
 
 }
