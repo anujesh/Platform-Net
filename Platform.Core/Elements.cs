@@ -82,6 +82,7 @@
         public Able()
         {
             IsEdit = false;
+
             IsView = false;
             IsDelete = false;
             IsCreate = false;
