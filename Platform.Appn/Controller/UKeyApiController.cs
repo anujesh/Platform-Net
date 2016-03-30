@@ -12,7 +12,7 @@ namespace Platform.Appn.Controller
         where rpT : ResponseItem<T>, new()
         where rpTs : ResponseItem<Ts>, new()
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(T));
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("UkeyApiController");
         protected readonly IUkeyRepository<T, Ts> _repo;
 
         public UkeyApiController(IUkeyRepository<T, Ts> repo) : base(repo)
@@ -34,7 +34,7 @@ namespace Platform.Appn.Controller
             {
                 respo.error = 1;
                 respo.status = "Error";
-                log.ErrorFormat("Pages", ex);
+                log.ErrorFormat("Pages {0}", ex.Message);
             }
 
             return respo;
@@ -54,7 +54,7 @@ namespace Platform.Appn.Controller
             {
                 respo.error = 1;
                 respo.status = "Error";
-                log.ErrorFormat("Pages", ex);
+                log.ErrorFormat("Pages {0}", ex.Message);
             }
 
             return respo;

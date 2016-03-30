@@ -11,7 +11,7 @@ namespace Platform.Data
 {
     public class DbCareService : DBAccess
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(DbCareService));
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(typeof(DbCareService));
 
         private ICoreConfigMan _config;
 
@@ -24,6 +24,8 @@ namespace Platform.Data
             ICoreConfigMan config
         )
         {
+            _log.InfoFormat("DbCareService Constructing");
+
             _config = config;
             db_prefix = _config.DbPrefix;
 
@@ -45,6 +47,7 @@ namespace Platform.Data
 
         private List<DbVersionInfo> getDbVersionStatus()
         {
+            _log.InfoFormat("getDbVersionStatus");
             List<DbVersionInfo> listDbInfo = new List<DbVersionInfo>();
 
             using (var conn = GetOpenConnection())
@@ -59,12 +62,14 @@ namespace Platform.Data
 
         public bool deploy(bool mode = true)
         {
+            _log.InfoFormat("Deploy {0}", mode);
             fileVersion = 0;
 
             string[] folders = _config.DbMigrationFolders;
 
             foreach(string folder in folders)
             {
+                _log.InfoFormat("Deploy ; Loading files from {0}", folder);
                 string[] files = Directory.GetFiles(string.Format(_config.DbMigrationBase,folder));
 
                 ScriptInfo si = new ScriptInfo();
@@ -81,9 +86,11 @@ namespace Platform.Data
 
                 foreach (string file in files)
                 {
+                    _log.InfoFormat("Deploy : Loading file {0}", file);
                     int dbModuleVersion = getCurrentModuleDbVersion(folder);
                     si.LoadScriptFile(file);
 
+                    _log.InfoFormat("Deploy : Compaire {0} x {2}", si.Version , dbModuleVersion);
                     if (si.Version > dbModuleVersion)
                     {
                         try
@@ -93,11 +100,12 @@ namespace Platform.Data
                                                     (`module_name`, `version`, descript) 
                                                     VALUES ('{1}', '{2}', '{3}');", db_prefix, si.Module, si.Version, si.Descript);
 
+                            _log.InfoFormat("Deploy : SQl - {0}", sqlin);
                             ExecuteSQL(sqlin);
                         }
                         catch (Exception ex)
                         {
-                            log.ErrorFormat("Deploy - Running SQL > " + sqlin, ex.Message);
+                            _log.ErrorFormat("Deploy - Running SQL > " + sqlin, ex.Message);
                             throw ex;
                         }
                     }
@@ -109,6 +117,7 @@ namespace Platform.Data
 
         public void ExecuteSQL(string sqlin)
         {
+            _log.InfoFormat("Execute SQL : {0}", sqlin);
             using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(sqlin))
             {
             }
@@ -121,6 +130,7 @@ namespace Platform.Data
 
         private int getCurrentModuleDbVersion(string fileModule)
         {
+            _log.InfoFormat("getCurrentModuleDbVersion {0}", fileModule);
             int found = 0;
 
             try
@@ -130,6 +140,7 @@ namespace Platform.Data
             }
             catch (Exception ex)
             {
+                _log.ErrorFormat("getCurrentModuleDbVersion ; {0}", ex.Message);
                 //DIE("Unable to access the version infomation table, please check the Configs and make sure you run the setup first.");
             }
 

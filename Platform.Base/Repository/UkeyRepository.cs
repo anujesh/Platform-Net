@@ -11,6 +11,8 @@ namespace Platform.Base.Repository
         where Ts : CoreList<T>, new()
         where T : UkeyModel, new()
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("UkeyRepository");
+
         public UkeyRepository() : base() { }
 
         public virtual Ts GetList()
@@ -20,6 +22,8 @@ namespace Platform.Base.Repository
 
         public virtual Ts GetList(string onWhere = "")
         {
+            
+
             Ts lists = new Ts();
 
             if (!string.IsNullOrEmpty(onWhere))
@@ -32,6 +36,8 @@ namespace Platform.Base.Repository
                     SELECT COUNT(*) as Total FROM {0} WHERE 1=1 {1};
                     SELECT * FROM {0} WHERE 1=1 {1} LIMIT 0, 30"
                     , tableName, onWhere);
+
+            log.InfoFormat("GetList : {0}", sql);
 
             using (SqlMapper.GridReader multi = GetConnection().QueryMultiple(sql))
             {
