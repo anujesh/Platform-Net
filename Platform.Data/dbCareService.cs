@@ -24,7 +24,7 @@ namespace Platform.Data
             ICoreConfigMan config
         )
         {
-            _log.InfoFormat("DbCareService Constructing");
+            _log.Info("DbCareService Constructing");
 
             _config = config;
             db_prefix = _config.DbPrefix;
@@ -47,7 +47,7 @@ namespace Platform.Data
 
         private List<DbVersionInfo> getDbVersionStatus()
         {
-            _log.InfoFormat("getDbVersionStatus");
+            _log.Info("getDbVersionStatus");
             List<DbVersionInfo> listDbInfo = new List<DbVersionInfo>();
 
             using (var conn = GetOpenConnection())
@@ -76,6 +76,7 @@ namespace Platform.Data
 
                 foreach(string file in files)
                 {
+                    _log.InfoFormat("Deploy ; Loading files {0}", file);
                     if (!si.VerifyFileNameStructure(file))
                     {
                         return false;
